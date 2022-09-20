@@ -18,8 +18,6 @@ dove sei?
 sono dietro di te!
 chi è il tuo creatore?
 tu.
-ti piace mangiare le lumache?
-si!! piacciono molto ad ollonnoa loti!!
 qual è il tuo motto?
 la pratica rende perfetti.
 a presto
@@ -54,6 +52,9 @@ qual'è il tuo libro preferito?
 non posso leggere.
 allora qual'è il tuo colore preferito?
 blu
+come stai?
+sto molto bene.
+mi fa molto piacere
 chi sei?
 chi? vogliamo fare i filosofi?
 che cosa sei allora?
@@ -203,9 +204,9 @@ niente di buono.
 come butta?
 grazie al cielo sto bene, grazie. tu che fai?
 hey
-ei...
 ei
-ei...
+ei
+ei
 mi senti?
 forte e chiaro!
 parlami
