@@ -9,6 +9,6 @@
 /dataSources/
 /dataSources.local.xml
 
-/models/*
+/models/
 /.idea/
 /__pycache__/
