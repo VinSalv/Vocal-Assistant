@@ -111,7 +111,7 @@ def get_date(speech_language):
     return day_word + " " + day_number + " " + month + " " + year
 
 
-def get_time(speech_language):
+def get_time():
     if platform.system() == "Windows":
         return datetime.now().strftime('%H e %#m')
     else:
@@ -150,7 +150,7 @@ if __name__ == '__main__':
 
             elif any(word in recognized_data for word in
                      ["ore", "ora", "orario", "hours", "hour", "whattime"]):
-                current_time = get_time(voice_assistant.speech_language)
+                current_time = get_time()
                 if voice_assistant.speech_language == "it-IT":
                     bot_response = f"sono le ore: {current_time}"
                 else:
