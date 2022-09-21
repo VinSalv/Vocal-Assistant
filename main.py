@@ -1,9 +1,9 @@
 import pyttsx3
 import speech_recognition
 
-from utilities.Language import Language
 from bot.Bot import Bot
 from bot.VoiceAndRecognition import VoiceAndRecognition
+from utilities.Language import Language
 
 if __name__ == '__main__':
     # inizializzazione del riconoscimento vocale e del microfono
@@ -11,7 +11,7 @@ if __name__ == '__main__':
     microphone = speech_recognition.Microphone()
 
     # inizializzazione voce e comprensione del bot
-    language = Language.ITALIANO
+    language = Language.ITALIANO.value
     voice_and_recognition = VoiceAndRecognition(name="",
                                                 sex="",
                                                 speech_language=language,

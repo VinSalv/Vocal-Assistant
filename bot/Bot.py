@@ -7,6 +7,8 @@ from chatterbot.comparisons import levenshtein_distance
 from chatterbot.response_selection import get_first_response
 from chatterbot.trainers import ListTrainer
 
+from utilities.Language import Language
+
 logging.basicConfig(level=logging.CRITICAL)
 
 
@@ -26,7 +28,7 @@ def get_date(language):
     year = splitted_date[2]
 
     # traduzione del giorno
-    if language == "it-IT":
+    if language == Language.ITALIANO.value:
         if day_word == "Monday":
             day_word = "Lunedì"
         elif day_word == "Tuesday":
@@ -58,7 +60,7 @@ def get_date(language):
             day_word = "Sunday"
 
     # traduzione del mese
-    if language == "it-IT":
+    if language == Language.ITALIANO.value:
         if month == "1":
             month = "Gennaio"
         elif month == "2":
@@ -138,7 +140,7 @@ class Bot:
 
     def train(self, language):
         # addestramento con esempio di comunicazione
-        if language == "it-IT":
+        if language == Language.ITALIANO.value:
             with open("./example_of_communication/comunicazione_di_addestramento") as f:
                 conversation = f.readlines()
                 trainer = ListTrainer(self.bot)
@@ -161,7 +163,7 @@ class Bot:
                 recognized_data.__contains__("chiamarti") or \
                 recognized_data.__contains__("your name") or \
                 recognized_data.__contains__("call you"):
-            if language == "it-IT":
+            if language == Language.ITALIANO.value:
                 return f"mi chiamo {self.name}, ma tu puoi chiamarmi come vuoi!"
             else:
                 return f"my name is {self.name}, but you can call me whatever you want!"
@@ -170,7 +172,7 @@ class Bot:
         elif any(word in recognized_data for word in
                  ["ore", "ora", "orario", "hours", "hour", "whattime"]):
             current_time = get_time()
-            if language == "it-IT":
+            if language == Language.ITALIANO.value:
                 return f"sono le ore: {current_time}"
             else:
                 return f"are the hours: {current_time}"
@@ -179,7 +181,7 @@ class Bot:
         elif any(word in recognized_data for word in
                  ["data", "giorno", "mese", "anno", "date", "day", "month", "year"]):
             current_date = get_date(language)
-            if language == "it-IT":
+            if language == Language.ITALIANO.value:
                 return f"oggi è: {current_date}"
             else:
                 return f"today is: {current_date}"

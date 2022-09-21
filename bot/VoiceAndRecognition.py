@@ -5,6 +5,8 @@ import wave  # creare e leggere file audio wav
 import speech_recognition  # riconoscimento vocale dell'utente (Speech-To-Text)
 from vosk import Model, KaldiRecognizer  # riconoscimento offline
 
+from utilities.Language import Language
+
 
 class VoiceAndRecognition:
     name = ""
@@ -22,7 +24,7 @@ class VoiceAndRecognition:
         voices = tts_engine.getProperty("voices")
 
         # settaggio lingua del bot
-        if self.speech_language == "it-IT":
+        if self.speech_language == Language.ITALIANO.value:
             tts_engine.setProperty("voice", voices[1].id)
         else:
             tts_engine.setProperty("voice", voices[2].id)
@@ -52,10 +54,10 @@ class VoiceAndRecognition:
             # utilizzo del riconoscimento online tramite Google
             try:
                 print("Inizio del riconoscimento vocale... ")
-                if self.recognition_language == "it-IT":
-                    recognized_data = recognizer.recognize_google(audio, language="it-IT").lower()
+                if self.recognition_language == Language.ITALIANO.value:
+                    recognized_data = recognizer.recognize_google(audio, language=Language.ITALIANO.value).lower()
                 else:
-                    recognized_data = recognizer.recognize_google(audio, language="en-UK").lower()
+                    recognized_data = recognizer.recognize_google(audio, language=Language.INGLESE.value).lower()
             except speech_recognition.UnknownValueError:
                 print("Riprova.")
                 pass
@@ -82,7 +84,7 @@ class VoiceAndRecognition:
             data = audio_file.readframes(audio_file.getnframes())
 
             # settaggio del riconoscimento offline
-            if self.recognition_language == "it-IT":
+            if self.recognition_language == Language.ITALIANO.value:
                 model = Model("../models/modello_italiano")
             else:
                 model = Model("../models/modello_inglese")
