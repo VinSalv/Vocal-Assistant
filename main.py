@@ -1,45 +1,46 @@
 import pyttsx3
 import speech_recognition
 
-from assistantSpeachAndRecognition.VoiceAssistant import setup_assistant_voice, record_and_recognize_audio, \
-    play_voice_assistant_speech, VoiceAssistant
 from bot.Bot import Bot
+from bot.VoiceAndRecognition import VoiceAndRecognition
 
 if __name__ == '__main__':
-
     # inizializzazione del riconoscimento vocale e del microfono
     recognizer = speech_recognition.Recognizer()
     microphone = speech_recognition.Microphone()
 
+    # inizializzazione voce e comprensione del bot
+    language = "it-IT"
+    voice_and_recognition = VoiceAndRecognition(name="",
+                                                sex="",
+                                                speech_language=language,
+                                                recognition_language=language)
+
     # inizializzazione dello strumento di sintesi vocale
     tts_engine = pyttsx3.init()
-
-    # impostazione dei dati dell'assistente vocale
-    voice_assistant = VoiceAssistant(name="Mark", sex="male", speech_language="it-IT", recognition_language="it-IT")
-
-    # impostazione della voce dell'assistente vocale
-    tts_engine = setup_assistant_voice(tts_engine, voice_assistant)
+    tts_engine = voice_and_recognition.setup_bot_voice(tts_engine)
 
     # istanza e addestramento del bot
     name_bot = "Jarvis"
     bot = Bot(name=name_bot)
-    bot.train(voice_assistant.speech_language)
+    bot.train(voice_and_recognition.speech_language)
 
     while True:
         try:
             # riconoscimento comando
-            recognized_data = record_and_recognize_audio(voice_assistant, microphone, recognizer)
-            print(recognized_data)
+            recognized_data = voice_and_recognition.record_and_recognize_audio(microphone, recognizer)
 
             if len(recognized_data) > 0:
+                print("Tu: " + recognized_data)
+
                 # genera risposta
-                bot_response = bot.get_response(recognized_data, voice_assistant)
+                bot_response = bot.get_response(recognized_data, language)
                 if bot_response is None:
                     break
 
                 # output vocale
-                print(bot_response)
-                play_voice_assistant_speech(tts_engine, bot_response)
+                print(name_bot + ": " + str(bot_response))
+                voice_and_recognition.play_voice_bot_speech(tts_engine, bot_response)
 
         except(KeyboardInterrupt, EOFError, SystemExit):
             print("uscita!")

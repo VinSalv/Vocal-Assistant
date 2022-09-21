@@ -10,7 +10,7 @@ from chatterbot.trainers import ListTrainer
 logging.basicConfig(level=logging.CRITICAL)
 
 
-def get_date(speech_language):
+def get_date(language):
     # preleva data
     date_format = ""
     if platform.system() == "Windows":
@@ -26,7 +26,7 @@ def get_date(speech_language):
     year = splitted_date[2]
 
     # traduzione del giorno
-    if speech_language == "it-IT":
+    if language == "it-IT":
         if day_word == "Monday":
             day_word = "Lunedì"
         elif day_word == "Tuesday":
@@ -58,7 +58,7 @@ def get_date(speech_language):
             day_word = "Sunday"
 
     # traduzione del mese
-    if speech_language == "it-IT":
+    if language == "it-IT":
         if month == "1":
             month = "Gennaio"
         elif month == "2":
@@ -136,9 +136,9 @@ class Bot:
             response_selection_method=get_first_response
         )
 
-    def train(self, speech_language):
+    def train(self, language):
         # addestramento con esempio di comunicazione
-        if speech_language == "it-IT":
+        if language == "it-IT":
             with open("./example_of_communication/comunicazione_di_addestramento") as f:
                 conversation = f.readlines()
                 trainer = ListTrainer(self.bot)
@@ -149,7 +149,7 @@ class Bot:
                 trainer = ListTrainer(self.bot)
                 trainer.train(conversation)
 
-    def get_response(self, recognized_data, voice_assistant):
+    def get_response(self, recognized_data, language):
         # esci
         if any(word in recognized_data for word in
                ["esci", "spegniti", "exit", "turn off", "switch off"]):
@@ -161,7 +161,7 @@ class Bot:
                 recognized_data.__contains__("chiamarti") or \
                 recognized_data.__contains__("your name") or \
                 recognized_data.__contains__("call you"):
-            if voice_assistant.speech_language == "it-IT":
+            if language == "it-IT":
                 return f"mi chiamo {self.name}, ma tu puoi chiamarmi come vuoi!"
             else:
                 return f"my name is {self.name}, but you can call me whatever you want!"
@@ -170,7 +170,7 @@ class Bot:
         elif any(word in recognized_data for word in
                  ["ore", "ora", "orario", "hours", "hour", "whattime"]):
             current_time = get_time()
-            if voice_assistant.speech_language == "it-IT":
+            if language == "it-IT":
                 return f"sono le ore: {current_time}"
             else:
                 return f"are the hours: {current_time}"
@@ -178,9 +178,9 @@ class Bot:
         # restituisci data
         elif any(word in recognized_data for word in
                  ["data", "giorno", "mese", "anno", "date", "day", "month", "year"]):
-            current_date = get_date(voice_assistant.speech_language)
-            if voice_assistant.speech_language == "it-IT":
-                return f"oggi è : {current_date}"
+            current_date = get_date(language)
+            if language == "it-IT":
+                return f"oggi è: {current_date}"
             else:
                 return f"today is: {current_date}"
 
