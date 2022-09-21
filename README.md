@@ -28,5 +28,5 @@ The developed code is divided in the following folders/classes:
 -	The class main.py which allows to initialize and start the bot.
 
 ## Biography
-ChatterBot: https://chatterbot.readthedocs.io/en/stable/
-Voice and Recognition: https://geekitbase.info/content/8261
+- ChatterBot: https://chatterbot.readthedocs.io/en/stable/
+- Voice and Recognition: https://geekitbase.info/content/8261
