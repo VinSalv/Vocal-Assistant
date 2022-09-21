@@ -14,6 +14,8 @@ Implementation of Vocal Assistant using google's speach recognition online/offli
 |   |-- models
 |   |   |-- modello_inglese
 |   |   |-- modello_italiano
+|   |-- utilities
+|   |   |-- Language.py
 |   |-- db.sqlite3
 |   |-- main.py
 ```
@@ -24,6 +26,8 @@ The developed code is divided in the following folders/classes:
     -	VoiceAssistant.py implementing the voice and the recognition capability related to the bot.
 -	The “example_of_communication” folder contains text files to train the bot with an example of communication.
 -	The “models” folder contains files to recognise the voce offline.
+-	The “utilities” folder contains:
+    -	Language.py implementing enumeration of italian and english language;
 -	The file db.sqlite3 contains your interaction with the bot in order to improve its communication.
 -	The class main.py which allows to initialize and start the bot.
 
