@@ -24,7 +24,7 @@ Implementation of Vocal Assistant using google's speach recognition online/offli
 The developed code is divided in the following folders/classes:
 
 - The “bot” folder contains:
-    - Bot.py implementing class Bot related to ChatterBot which supports a communication and recognises specific
+    - Bot.py implementing class Bot related to ChatterBot which sustains a communication and recognises specific
       commands;
     - VoiceAssistant.py implementing the voice and the recognition capability related to the bot.
 - The “example_of_communication” folder contains text files to train the bot with an example of communication.
@@ -33,6 +33,12 @@ The developed code is divided in the following folders/classes:
     - Language.py implementing enumeration of italian and english language;
 - The file db.sqlite3 contains your interaction with the bot in order to improve its communication.
 - The class main.py which allows to initialize and start the bot.
+
+### Current capacities
+- telling time
+- telling date
+- sustaining a simple conversation
+- learning from interactions
 
 ## Biography
 
