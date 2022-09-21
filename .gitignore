@@ -9,7 +9,7 @@ dataSources/
 
 *.xml
 
-models/modello_inglese
-models/modello_italiano
+models/modello_inglese/*
+models/modello_italiano/*
 .idea/
 __pycache__/
