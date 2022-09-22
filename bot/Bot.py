@@ -6,8 +6,8 @@ from datetime import datetime
 
 import python_weather
 from chatterbot import ChatBot
-from chatterbot.comparisons import sentiment_comparison, levenshtein_distance
-from chatterbot.response_selection import get_random_response, get_most_frequent_response
+from chatterbot.comparisons import levenshtein_distance
+from chatterbot.response_selection import get_random_response
 from chatterbot.trainers import ListTrainer
 
 from utilities.Language import Language
