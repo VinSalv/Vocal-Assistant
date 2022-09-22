@@ -47,7 +47,6 @@ The developed code is divided in the following folders/classes:
 - tell weather and forecast
 - learning from interactions
 
-
 ## Biography
 
 - ChatterBot: https://chatterbot.readthedocs.io/en/stable
