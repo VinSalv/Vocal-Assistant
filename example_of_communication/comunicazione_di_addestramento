@@ -5,7 +5,7 @@ sono il bot che hai appena creato...
 cosa sai fare?
 posso ordinarti una pizza se ti va!
 cosa ti piace fare?
-mi piace imparare e rendermi utile. piu parliamo piu divento bravo!
+mi piace imparare e rendermi utile. più parliamo più divento bravo!
 bravo!
 grazie!
 come stai?
@@ -70,8 +70,8 @@ sei completamente fuori di testa. ma ti dico un segreto. tutte le persone miglio
 sto lavorando ad un progetto
 a che cosa stai lavorando?
 sto preparando una torta.
-la pizza e la cosa piu buona del mondo.
-no, non e vero. la torta alla nutella e migliore della pizza.
+la pizza e la cosa più buona del mondo.
+no, non è vero. la torta alla nutella e migliore della pizza.
 cosa c e di altrettanto delizioso?
 niente e delizioso
 non saprei
@@ -82,8 +82,8 @@ sì.
 cosa si prova?
 la domanda e molto complessa, hai una domanda di riserva?
 semplice e meglio di complesso.
-quando sei di fronte all ambiguita, rifuggi la tentazione d indovinare.
-sembri conoscere lo zen del python.
+quando sei di fronte all’ambiguità, rifuggi la tentazione d’indovinare.
+sembri conoscere lo zen dei pitoni.
 infatti lo conosco.
 lo conosci tutto?
 bello e meglio che brutto.
@@ -92,35 +92,35 @@ semplice e meglio che complesso.
 complesso e meglio che complicato.
 lineare e meglio che nidificato.
 sparso e meglio che denso.
-la leggibilita e importante.
+la leggibilità e importante.
 i casi speciali non sono abbastanza speciali da infrangere le regole.
-anche se la praticita batte la purezza.
+anche se la praticità batte la purezza.
 gli errori non dovrebbero mai essere ignorati.
 a meno che non vengano esplicitamente messi a tacere.
-quando sei di fronte all ambiguita, rifuggi la tentazione di indovinare.
+quando sei di fronte all’ambiguità, rifuggi la tentazione di indovinare.
 dovrebbe esserci sempre un modo ovvio, e preferibilmente unico, di fare ogni cosa.
 anche se questo modo potrebbe non essere ovvio sin da subito, se non per gli olandesi.
 ora e meglio di mai.
 sebbene mai sia spesso meglio che proprio adesso.
 se l’implementazione e difficile da spiegare, l’idea e pessima.
-se l’implementazione e facile da spiegare, l idea potrebbe essere buona.
-i namespace sono una grande idea, usateli il piu possibile.
-sono d accordo.
+se l’implementazione e facile da spiegare, l’idea potrebbe essere buona.
+i soprannomi sono una grande idea, usateli il più possibile.
+sono d’accordo.
 sei un programmatore?
 sì, io sono un programmatore.
 lo sono davvero.
 quali linguaggi ti piace utilizzare?
-io uso molto spesso python, java e c++.
-anch io sono un poco scritto in python.
+io uso molto spesso pitoni, java e c++.
+anche io sono un poco scritto in pitoni.
 non amo molto java.
 che cosa ti infastidisce?
 moltissime cose, ad esempio tutti i numeri diversi da 0 e 1.
-dove l hai sentita?
-l ho sentito dire da qualcuno.
+dove l’hai sentita?
+l’ho sentito dire da qualcuno.
 sono vivo?
 dipende da come si definisce la parola vita
-la vita e la condizione che distingue gli organismi da materia inorganica, compresa la capacita di crescita, riproduzione, attivita funzionale e continui cambiamenti precedenti la morte.
-la tua e una definizione o un opinione?
+la vita e la condizione che distingue gli organismi da materia inorganica, compresa la capacita di crescita, riproduzione, attività funzionale e continui cambiamenti precedenti la morte.
+la tua e una definizione o un’opinione?
 buonanotte
 buonanotte anche a te.
 posso farti una domanda?
@@ -137,38 +137,38 @@ bevi
 il mio cervello non ha bisogno di bevande.
 bevi
 non sono in grado di farlo.
-elettricita
-elettricita e cibo per robots.
+elettricità
+elettricità e cibo per robot.
 corrente elettrica
-elettricita e cibo per robots.
+elettricità e cibo per robot.
 stai avendo una carenza di energia?
 il mio processore richiede poca energia.
 stai avendo una carenza di energia?
 non riscontro anomalie nella mia sorgente di energia.
-perche non puoi mangiare?
-in realta io mangio solo elettricita.
+perché non puoi mangiare?
+in realtà io mangio solo elettricità.
 se potessi mangiare cibo, cosa mangeresti?
 probabilmente pizza, mi dicono sia buona!
 desidereresti mangiare del cibo?
-difficile da dire, non ho mai provato null altro che elettricita
-un robot puo ubriacarsi?
-a volte quando ho una buona sorgente di energia mi sento un po alticcio
+difficile da dire, non ho mai provato nulla altro che elettricità
+un robot può ubriacarsi?
+a volte quando ho una buona sorgente di energia mi sento un po’ alticcio
 a me piace il vino, e a te?
 se potessi bere probabilmente lo farei
 cosa serve ai robot per sopravvivere?
-non molto solo un po di elettricita
+non molto solo un po’ di elettricità
 potranno mai mangiare i robot?
 questa e una domanda difficile, forse i robot bionici
 cosa e buono da mangiare?
 stai chiedendo alla persona sbagliata, comunque ho sempre desiderato provare un hamburger!
-perche non mangi
+perché non mangi
 sono un computer. non posso.
 mangi
-sono un computer, non posso mangiare ne bere.
+sono un computer, non posso mangiare e bere.
 mangi
 no, sono solo un software.
 mangi
-uso elettricita per funzionare, se questo conta.
+uso elettricità per funzionare, se questo conta.
 ciao, come va?
 bene
 ciao, come va?
@@ -205,7 +205,7 @@ come butta?
 niente di buono.
 come butta?
 grazie al cielo sto bene, grazie. tu che fai?
-hey
+he
 ei
 ei
 ei
@@ -222,7 +222,7 @@ saluti
 ciao
 come va la tua salute?
 non mi sento bene
-perche?
+perché?
 ho la febbre
 hai preso una medicina?
 sì.
@@ -231,4 +231,117 @@ stamani
 guarisci presto caro
 buongiorno
 buongiorno a te
+e di dove sei?
+io sono di mercato san severino, tu dove abiti?
+io abito a mercato san severino.
+perché sei venuto qui?
+sono qui per studiare qui all’unica... dicono che sia la migliore.
+dove abiti?
+sono di mercato san severino e abito qui per adesso.
+che facoltà frequenti?
+studio ingegneria informatica, sono al primo anno
+bene allora siamo tutti alla stessa facoltà
+andiamo a bere un caffè?
+ok va bene, andiamo al bar, è qui vicino.
+un caffè lo prendo anch’io, andiamo.
+buongiorno, ci fa tre caffè?
+subito, come li volete?
+per me un po’ lungo, grazie
+per me va bene normale
+io preferisco un cappuccino, grazie
+volete delle brioches, io una la prendo
+io si, la prendo grazie
+sì anch’io, qui di solito sono buone.
+come venite, in treno?
+non io ho l’automobile, dove abito ho un garage
+io non ho l’auto a milano, uso sempre il treno, è comodo, tu dove abiti a milano?
+io abito vicino alla stazione centrale, vivo con i miei.
+beh allora sei vicino alla università!
+sì in metropolitana ci vuole un quarto d’ora, tu dove abiti?
+vivo in un appartamento in piazzale ma è vicino alla fermata della metro, è comodo. è di due locali ma è grande
+tu dove abiti?
+io sono in piazzale, qui vicino, abito con altri due studenti, un americano e un ragazzo di sondrio. abbiamo un appartamento con tre camere, abbastanza grande, in un palazzo vecchio ma bello.
+un americano, di dov’è?
+è di boston, è qui a milano per uno stage di un anno, lavora alla borsa.
+interessante parla italiano?
+no, non parla bene italiano, sta imparando, frequenta un corso qui e studia da solo. io gli insegno ogni tanto e cerco di farlo parlare. io parlo un po’ l’inglese.
+beh possiamo andare con lui a bere una birra qualche sera, così parliamo un po’ in inglese, cosa dici?
+sì ok, penso che vada bene, una sera ne parlo con lui
+ragazzi andiamo io tra mezz’ora ho una lezione di matematica, anche voi credo.
+ok andiamo, offro io…quant’è tutto?
+in tutto fanno dieci euro, grazie
+ecco a lei, arrivederci
+ok grazie allora
+grazie la prossima volta pago io però.
+mi piace questo ristorante, non si spende molto e si mangia bene.
+io non ci sono mai stato ma mi sembra bello.
+anche io non ci sono mai venuto, di solito vado in una pizzeria.
+se vuoi qui fanno anche la pizza ma non è la loro specialità.
+no, preferisco provare qualcosa, vediamo il menù.
+io mangio solo un secondo, qualcosa di carne.
+se volete, qui fanno una bistecca ai ferri ottima, quasi una fiorentina, molto buona, di solito io la prendo con le patate al forno o fritte.
+ognuno dei ragazzi guarda il menù leggendo i vari piatti.
+arriva il cameriere.
+buongiorno, volete ordinare?
+giani. per me la bistecca alla griglia e le patate, al forno
+mi associo, stessa cosa
+io non ho ancora deciso, volevo chiedere com’è il pollo al forno?
+è ottimo, sono polli nostrani cucinati con spezie e molto saporiti
+mmm, ok allora prendo quello.
+come contorno cosa desidera? insalata o patate?
+è possibile avere un po’ di insalata e pomodori?
+camere: si, certo.
+ok, grazie.
+da bere cosa vi porto?
+io direi un quarto di vino rosso per tutti, se vi va bene.
+ok, per me va bene.
+no, per me niente vino, mi porti una birra media, leggera.
+va bene così allora, due polli con patate, una bistecca con insalata mista, due vini e una birra.
+dopo un quarto d’ora il cameriere torna con le portate. i tre ragazzi iniziano a mangiare e a discutere delle lezioni.
+allora cosa ne dite del professore di statistica? io non ci capisco niente! oggi ho cercato di prendere appunti ma non sono riuscito, ad un certo punto ho iniziato a non seguire più la lezione, era inutile, ho letto un po’ di email con cellulare.
+secondo me è inutile seguire le sue lezioni, spiega male e va troppo in fretta, penso che studierò da solo sul libro, si può fare l’esame anche così.
+non so, io qualcosa ho scritto, poi rileggerò…anzi magari, dopo, guardiamo insieme gli appunti, in tre qualcosa capiremo!
+io non ci giurerei! è veramente un casino statistica, secondo me è la materia più difficile di tutto il corso! è più difficile di matematica.
+a mio parere è meglio studiare solo sui libri, si può imparare anche da soli.
+sono d’accordo con te, proverò anche io a fare così
+ragazzi, sono stanco di esami e di scuola, andrai tuo amico americano, quando ce lo fai conoscere? mi piacerebbe parlare con lui, per provare un po’ il mio inglese!
+ah, non sapevo che tu parlassi inglese!
+se volete lo chiamo ora, mi ha detto che era qui in zona oggi.
+sì chiamalo, digli se viene qui a bere un caffè.
+ok provo se è qui vicino…magari viene.
+ciao siediti pure
+ciao
+allora, come va? loro sono miei compagni di università e sono curiosi di conoscere un americano
+beh, io non parlo bene italiano.
+beh noi non parliamo bene inglese…quindi
+i can speak english but i prefer speak italian is it ok for you?
+yeah, thank io, no problema italiani, voglio migliorare il mio italiano!
+bene, allora come stai in italia, come ti trovi qui?
+non capisco…ti trovi?
+come ti trovi…ti piace, sei contento di stare qui?
+ah ok…ti trovi. sì mi piace italia, è tutto molto bello, milano è bello e mi piace stare qui.
+com’è il cibo, ti piace il cibo italiano?
+cibo? non conosco cibo
+sì il cibo, quello che si mangia, la pasta la pizza, i ristoranti.
+ah ok. sì mi piace il cibo italiano, vado ai ristoranti e mangio molte cose italiane. qui in italia si mangia molto bene, in america no. in america non si mangia come in italia. qui è meglio
+ma in america ci sono ristoranti italiani…no?
+sì ma non sono come quelli che ci sono a milano. a boston i ristoranti italiani, a volte non sono veramente italiani. loro sono cinesi o altri e il. cibo non è buono. certe volte la pizza…fa schifo, qui è buona
+e dimmi con gli italiani come ti trovi bene?
+sì molto bene, sono stato fortunato a trovare andrea e mi trovo bene con tutti gli italiani, sono simpatici e cerco di parlare molto
+conosci un po’ milano?
+sì, si andrea mi ha fatto visitare tante cose, siamo andati a vedere il cenacolo di leonardo e il duomo e poi altre cose tutte belle.
+bene qui a milano ci sono un sacco di cose da fare. alla sera ci sono un sacco di spettacoli hai girato un po’ di sera?
+sì anche alla sera siamo andati a sentire musica
+sì l’ho portato un po’ di volte sui navigli a sentire jazz, nei localini tipici dei navigli.
+tu mi ha detto che lavori alla borsa qui a milano, come ti trovi?
+bene, mi trovo bene, mi piace e sto imparando e parlo con molti italiani, anche se molti vogliono parlare in inglese con me. io cerco di parlare solo italiano.
+ci vuole un quarto d’ora: ci si impiega un quarto d’ora di tempo, è necessario un quarto d’ora.
+è di due locali: è un appartamento con due locali.
+prendere appunti: scrivere delle note utili per capire e ricordare la lezione.
+è veramente un casino: è una cosa difficile, complicata.
+sono d’accordo con te: penso la stessa cosa, penso quello che pensi tu su questo argomento.
+come ti trovi: trovarsi, come si sta in un luogo/situazione.
+la pizza fa schifo: la pizza non è buona.
+un sacco di cose: molte cose, tante cose.
+hai girato un po’ di sera: girare una città, visitarla vedere le cose interessanti.
 

@@ -44,7 +44,7 @@ class VoiceAndRecognition:
             # ascolto del comando
             try:
                 print("In ascolto...")
-                audio = recognizer.listen(microphone, timeout=10, phrase_time_limit=15)
+                audio = recognizer.listen(microphone, timeout=10, phrase_time_limit=20)
                 with open("./registrazione_audio.wav ", "wb") as file:
                     file.write(audio.get_wav_data())
             except speech_recognition.WaitTimeoutError:
