@@ -6,7 +6,7 @@ from datetime import datetime
 
 import python_weather
 from chatterbot import ChatBot
-from chatterbot.comparisons import synset_distance, levenshtein_distance, sentiment_comparison
+from chatterbot.comparisons import sentiment_comparison
 from chatterbot.response_selection import get_random_response
 from chatterbot.trainers import ListTrainer
 
@@ -17,6 +17,7 @@ from utilities.util import extract_cities_from, greet_morning_in, greet_afternoo
     know_weather_from, exit_from
 
 logging.basicConfig(level=logging.CRITICAL)
+
 
 class Bot:
     bot = None
