@@ -42,6 +42,7 @@ if __name__ == '__main__':
                 # genera risposta
                 bot_response = bot.get_response(recognized_data, language)
                 if bot_response is None:
+                    voice_and_recognition.play_voice_bot_speech(tts_engine, "Va bene. A presto!!!")
                     break
 
                 # output vocale
