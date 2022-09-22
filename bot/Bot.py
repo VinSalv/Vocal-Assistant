@@ -6,7 +6,7 @@ from datetime import datetime
 
 import python_weather
 from chatterbot import ChatBot
-from chatterbot.comparisons import sentiment_comparison
+from chatterbot.comparisons import synset_distance, levenshtein_distance, sentiment_comparison
 from chatterbot.response_selection import get_random_response
 from chatterbot.trainers import ListTrainer
 
@@ -17,7 +17,6 @@ from utilities.util import extract_cities_from, greet_morning_in, greet_afternoo
     know_weather_from, exit_from
 
 logging.basicConfig(level=logging.CRITICAL)
-
 
 class Bot:
     bot = None
@@ -110,7 +109,7 @@ class Bot:
                 elif month_number == "12":
                     month_word = "December"
 
-                return month_word
+            return month_word
 
         def translate_english_to_italian_(english_day_word):
             italian_day_word = ""
@@ -148,10 +147,10 @@ class Bot:
             day_word = translate_english_to_italian_(day_word)
 
         # conversione del mese da numero a parola
-        month_number = convert_number_to_word(language, month_number)
+        month_word = convert_number_to_word(language, month_number)
 
         # formula la data
-        current_date = day_word + " " + day_number + " " + month_number + " " + year
+        current_date = day_word + " " + day_number + " " + month_word + " " + year
 
         # ritorna la data
         if language == Language.ITALIANO.value:
@@ -238,7 +237,7 @@ class Bot:
                 weather = await client.get(city)
 
                 # preleva temperatura attuale
-                current_temperature = weather.current.temperature
+                current_temperature = str(weather.current.temperature)
 
                 # previsione di 3 giorni consecutivi
                 forecast_three_days = ""
@@ -360,7 +359,8 @@ class Bot:
 
         # restituisci risposta data dall'addestramento e verifica un eventuale saluto
         else:
-            response = ""
+            # formula una risposta del bot
+            response = str(self.bot.get_response(recognized_data.replace(self.name.lower(), '')))
 
             # verifica l'eventuale saluto o altro da parte dell'interlocutore
             is_greeting, correct_greeting = self.what_is_in(recognized_data)
@@ -371,8 +371,7 @@ class Bot:
                 if not correct_greeting:
                     response = self.get_correct_greeting_in(language)
             else:
-                # formula una risposta del bot
-                response = str(self.bot.get_response(recognized_data.replace(self.name.lower(), '')))
+
                 # verifica l'eventuale saluto da parte del bot
                 while True:
                     is_greeting, correct_greeting = self.what_is_in(response)
