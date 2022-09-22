@@ -210,8 +210,10 @@ class Bot:
         # restituisci nome bot
         elif recognized_data.__contains__("tuo nome") or \
                 (recognized_data.__contains__("come") and recognized_data.__contains__("chiami")) or \
+                (recognized_data.__contains__("che") and recognized_data.__contains__("nome")) or \
                 recognized_data.__contains__("chiamarti") or \
                 recognized_data.__contains__("your name") or \
+                (recognized_data.__contains__("what") and recognized_data.__contains__("name")) or \
                 recognized_data.__contains__("call you"):
             if language == Language.ITALIANO.value:
                 return f"mi chiamo {self.name}, ma tu puoi chiamarmi come vuoi!"
