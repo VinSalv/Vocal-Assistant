@@ -1,3 +1,5 @@
+import os
+
 import pyttsx3
 import speech_recognition
 
@@ -23,8 +25,11 @@ if __name__ == '__main__':
 
     # istanza e addestramento del bot
     name_bot = "Jarvis"
-    bot = Bot(name=name_bot)
-    bot.train(voice_and_recognition.speech_language)
+    if not os.path.exists("./db.sqlite3"):
+        bot = Bot(name=name_bot)
+        bot.train(voice_and_recognition.speech_language)
+    else:
+        bot = Bot(name=name_bot)
 
     while True:
         try:
