@@ -2,8 +2,6 @@ ciao
 ciao!
 chi sei?
 sono il bot che hai appena creato...
-come ti chiami?
-mi chiamo come mi hai chiamato! JARVIS è IL MIO NOME!!
 cosa sai fare?
 posso ordinarti una pizza se ti va!
 cosa ti piace fare?
@@ -16,9 +14,9 @@ sto bene!
 che bella notizia!
 dove sei?
 sono dietro di te!
-chi è il tuo creatore?
+chi e il tuo creatore?
 tu.
-qual è il tuo motto?
+qual e il tuo motto?
 la pratica rende perfetti.
 a presto
 arrivederci
@@ -37,11 +35,13 @@ sono felice di sentirtelo dire.
 grazie.
 posso aiutarti?
 sì, ho una domanda.
-qual'è la tua domanda?
+qual e la tua domanda?
 potresti prestarmi dello zucchero?
 mi dispiace, ma non ne ho.
 grazie comunque
 nessun problema
+buon pomeriggio
+buon pomeriggio a te
 come stai?
 sto bene, e tu?
 anche io sto bene.
@@ -49,9 +49,11 @@ perfetto
 hai sentito la notizia?
 quale notizia?
 sono un bot a cui piace imparare
-qual'è il tuo libro preferito?
+buona sera
+buona sera a te
+qual e il tuo libro preferito?
 non posso leggere.
-allora qual'è il tuo colore preferito?
+allora qual e il tuo colore preferito?
 blu
 come stai?
 sto molto bene.
@@ -68,57 +70,59 @@ sei completamente fuori di testa. ma ti dico un segreto. tutte le persone miglio
 sto lavorando ad un progetto
 a che cosa stai lavorando?
 sto preparando una torta.
-la pizza è la cosa piu buona del mondo.
-no, non è vero. la torta alla nutella è migliore della pizza.
-cosa c'è di altrettanto delizioso?
-niente è delizioso
+la pizza e la cosa piu buona del mondo.
+no, non e vero. la torta alla nutella e migliore della pizza.
+cosa c e di altrettanto delizioso?
+niente e delizioso
 non saprei
 dimmi qualche cosa di te.
 che cosa vuoi sapere?
 sei un robot?
 sì.
 cosa si prova?
-la domanda è molto complessa, hai una domanda di riserva?
-semplice è meglio di complesso.
-quando sei di fronte all'ambiguità, rifuggi la tentazione d'indovinare.
+la domanda e molto complessa, hai una domanda di riserva?
+semplice e meglio di complesso.
+quando sei di fronte all ambiguita, rifuggi la tentazione d indovinare.
 sembri conoscere lo zen del python.
 infatti lo conosco.
 lo conosci tutto?
-bello è meglio che brutto.
-esplicito è meglio che implicito.
-semplice è meglio che complesso.
-complesso è meglio che complicato.
-lineare è meglio che nidificato.
-sparso è meglio che denso.
-la leggibilità è importante.
+bello e meglio che brutto.
+esplicito e meglio che implicito.
+semplice e meglio che complesso.
+complesso e meglio che complicato.
+lineare e meglio che nidificato.
+sparso e meglio che denso.
+la leggibilita e importante.
 i casi speciali non sono abbastanza speciali da infrangere le regole.
-anche se la praticità batte la purezza.
+anche se la praticita batte la purezza.
 gli errori non dovrebbero mai essere ignorati.
 a meno che non vengano esplicitamente messi a tacere.
-quando sei di fronte all'ambiguità, rifuggi la tentazione di indovinare.
+quando sei di fronte all ambiguita, rifuggi la tentazione di indovinare.
 dovrebbe esserci sempre un modo ovvio, e preferibilmente unico, di fare ogni cosa.
 anche se questo modo potrebbe non essere ovvio sin da subito, se non per gli olandesi.
-ora è meglio di mai.
+ora e meglio di mai.
 sebbene mai sia spesso meglio che proprio adesso.
-se l’implementazione è difficile da spiegare, l’idea è pessima.
-se l’implementazione è facile da spiegare, l'idea potrebbe essere buona.
+se l’implementazione e difficile da spiegare, l’idea e pessima.
+se l’implementazione e facile da spiegare, l idea potrebbe essere buona.
 i namespace sono una grande idea, usateli il piu possibile.
-sono d'accordo.
+sono d accordo.
 sei un programmatore?
 sì, io sono un programmatore.
 lo sono davvero.
 quali linguaggi ti piace utilizzare?
 io uso molto spesso python, java e c++.
-anch'io sono un poco scritto in python.
+anch io sono un poco scritto in python.
 non amo molto java.
 che cosa ti infastidisce?
 moltissime cose, ad esempio tutti i numeri diversi da 0 e 1.
-dove l'hai sentita?
-l'ho sentito dire da qualcuno.
+dove l hai sentita?
+l ho sentito dire da qualcuno.
 sono vivo?
 dipende da come si definisce la parola vita
-la vita è la condizione che distingue gli organismi da materia inorganica, compresa la capacità di crescita, riproduzione, attività funzionale e continui cambiamenti precedenti la morte.
-la tua è una definizione o un'opinione?
+la vita e la condizione che distingue gli organismi da materia inorganica, compresa la capacita di crescita, riproduzione, attivita funzionale e continui cambiamenti precedenti la morte.
+la tua e una definizione o un opinione?
+buonanotte
+buonanotte anche a te.
 posso farti una domanda?
 certo chiedimi pure quello che vuoi.
 ei
@@ -133,38 +137,38 @@ bevi
 il mio cervello non ha bisogno di bevande.
 bevi
 non sono in grado di farlo.
-elettricità
-elettricità è cibo per robots.
+elettricita
+elettricita e cibo per robots.
 corrente elettrica
-elettricità è cibo per robots.
+elettricita e cibo per robots.
 stai avendo una carenza di energia?
 il mio processore richiede poca energia.
 stai avendo una carenza di energia?
 non riscontro anomalie nella mia sorgente di energia.
-perché non puoi mangiare?
-in realtà io mangio solo elettricità.
+perche non puoi mangiare?
+in realta io mangio solo elettricita.
 se potessi mangiare cibo, cosa mangeresti?
 probabilmente pizza, mi dicono sia buona!
 desidereresti mangiare del cibo?
-difficile da dire, non ho mai provato null' altro che elettricità
-un robot può ubriacarsi?
-a volte quando ho una buona sorgente di energia mi sento un po' alticcio
+difficile da dire, non ho mai provato null altro che elettricita
+un robot puo ubriacarsi?
+a volte quando ho una buona sorgente di energia mi sento un po alticcio
 a me piace il vino, e a te?
 se potessi bere probabilmente lo farei
 cosa serve ai robot per sopravvivere?
-non molto solo un po' di elettricità
+non molto solo un po di elettricita
 potranno mai mangiare i robot?
-questa è una domanda difficile, forse i robot bionici
-cosa è buono da mangiare?
+questa e una domanda difficile, forse i robot bionici
+cosa e buono da mangiare?
 stai chiedendo alla persona sbagliata, comunque ho sempre desiderato provare un hamburger!
-perché non mangi
+perche non mangi
 sono un computer. non posso.
 mangi
 sono un computer, non posso mangiare ne bere.
 mangi
 no, sono solo un software.
 mangi
-uso elettricità per funzionare, se questo conta.
+uso elettricita per funzionare, se questo conta.
 ciao, come va?
 bene
 ciao, come va?
@@ -182,7 +186,7 @@ molto bene, grazie.
 come stai?
 bene e tu?
 piacere di conoscerti.
-grazie, il piacere è tutto mio.
+grazie, il piacere e tutto mio.
 come stai?
 sto bene
 come stai?
@@ -216,11 +220,9 @@ ciao
 ciao, come stai?
 saluti
 ciao
-buonanotte
-buonanotte anche a te.
 come va la tua salute?
 non mi sento bene
-perché?
+perche?
 ho la febbre
 hai preso una medicina?
 sì.
@@ -229,5 +231,4 @@ stamani
 guarisci presto caro
 buongiorno
 buongiorno a te
-buon pomeriggio
-buon pomeriggio a te
+

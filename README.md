@@ -35,6 +35,7 @@ The developed code is divided in the following folders/classes:
 - The class main.py which allows to initialize and start the bot.
 
 ### Current capacities
+
 - telling time
 - telling date
 - sustaining a simple conversation
