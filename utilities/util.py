@@ -1,9 +1,9 @@
 from datetime import datetime
 
-MORNING = 5 <= datetime.now().hour < 12
-AFTERNOON = 12 <= datetime.now().hour < 17
-EVENING = 17 <= datetime.now().hour < 22
-NIGHT = datetime.now().hour >= 22 or datetime.now().hour < 5
+actually_is_morning = 5 <= datetime.now().hour < 12
+actually_is_afternoon = 12 <= datetime.now().hour < 17
+actually_is_evening = 17 <= datetime.now().hour < 22
+actually_is_night = datetime.now().hour >= 22 or datetime.now().hour < 5
 
 
 def greet_morning_in(string):
@@ -30,3 +30,46 @@ def extract_cities_from(csv):
     with open(csv, encoding="utf8") as f:
         cities = [row.lower().replace("\n", "") for row in f]
     return cities
+
+
+def exit_from(request):
+    return any(word in request.split(" ") for word in
+               ["esci", "spegniti", "exit", "turn off", "switch off"])
+
+
+def know_name_bot_from(request):
+    return request.__contains__("tuo nome") or \
+           (request.__contains__("come") and request.__contains__("chiami")) or \
+           (request.__contains__("che") and request.__contains__("nome")) or \
+           request.__contains__("chiamarti") or \
+           request.__contains__("your name") or \
+           (request.__contains__("what") and request.__contains__("name")) or \
+           request.__contains__("call you")
+
+
+def know_time_from(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["ore", "ora", "orario", "hours", "hour"]) or \
+           request.__contains__("what time")
+
+
+def know_date_from(request):
+    return any(word in request.split(" ") for word in
+               ["data", "mese", "anno", "date", "day", "month", "year"]) or \
+           request.__contains__("quale") and request.__contains__("giorno") or \
+           request.__contains__("che") and request.__contains__("giorno") or \
+           request.__contains__("giorno") and request.__contains__("di")
+
+
+def know_weather_from(request):
+    return any(word in request.split(" ") for word in
+               ["meteo", "weather", "forecast"]) or \
+           request.__contains__("previsioni del tempo") or \
+           request.__contains__("come è il tempo") or \
+           request.__contains__("com è il tempo") or \
+           request.__contains__("com'è il tempo") or \
+           request.__contains__("quale è il tempo") or \
+           request.__contains__("qual è il tempo") or \
+           request.__contains__("qual' è il tempo") or \
+           request.__contains__("che tempo") or \
+           request.__contains__("il tempo a")
