@@ -6,7 +6,8 @@ from vosk import Model
 from bot.BotAI import BotAI
 from bot.VoiceAndRecognition import VoiceAndRecognition
 from utilities.Language import Language
-from utilities.utils import extract_cities_from
+from utilities.utils import extract_cities_from, VERIFIED_A_PROBLEM_ITA, VERIFIED_A_PROBLEM_ENG, EXIT_ITA, EXIT_ENG, \
+    DOWNLOAD_MODEL_ENG, DOWNLOAD_MODEL_ITA
 
 name_bot = "Jarvis"
 language = Language.ITALIANO.value
@@ -17,14 +18,12 @@ def init_recognizer_offline():
     # estrai modello di riconoscimento offline
     if language == Language.ITALIANO.value:
         if not os.path.exists("./models/modello_italiano"):
-            print("Scaricare il modello da:\n"
-                  "https://alphacephei.com/vosk/models e decomprimere nella cartella models.")
+            print(DOWNLOAD_MODEL_ITA)
             exit(1)
         return Model("./models/modello_italiano")
     else:
         if not os.path.exists("./models/modello_inglese"):
-            print("Scaricare il modello da:\n"
-                  "https://alphacephei.com/vosk/models e decomprimere nella cartella models.")
+            print(DOWNLOAD_MODEL_ENG)
             exit(1)
         return Model("./models/modello_inglese")
 
@@ -76,14 +75,19 @@ if __name__ == '__main__':
 
                 # nessuna risposta quindi exit
                 if bot_response is None:
-                    bot.voice_and_recognition.output_response(name_bot, "Va bene. A presto!")
+                    bot.voice_and_recognition.output_response(name_bot,
+                                                              EXIT_ITA
+                                                              if language == Language.ITALIANO.value else
+                                                              EXIT_ENG)
                     break
 
                 # manda la risposta in output
                 bot.voice_and_recognition.output_response(name_bot, bot_response)
 
         except(KeyboardInterrupt, EOFError, SystemExit):
-            bot.voice_and_recognition.output_response("Si è verificato un problema! Riprova più tardi.")
+            bot.voice_and_recognition.output_response(VERIFIED_A_PROBLEM_ITA
+                                                      if language == Language.ITALIANO.value else
+                                                      VERIFIED_A_PROBLEM_ENG)
             exit(1)
 
     exit(0)
