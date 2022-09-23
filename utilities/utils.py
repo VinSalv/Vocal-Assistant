@@ -50,26 +50,37 @@ def know_name_bot_from(request):
 def know_time_from(request):
     return any(word in request.replace("'", " ").split(" ") for word in
                ["ore", "ora", "orario", "hours", "hour"]) or \
-           request.__contains__("what time")
+           request.__contains__("what") and request.__contains__("time")
 
 
 def know_date_from(request):
-    return any(word in request.split(" ") for word in
+    return any(word in request.replace("'", " ").split(" ") for word in
                ["data", "mese", "anno", "date", "day", "month", "year"]) or \
            request.__contains__("quale") and request.__contains__("giorno") or \
+           request.__contains__("qual") and request.__contains__("giorno") or \
            request.__contains__("che") and request.__contains__("giorno") or \
-           request.__contains__("giorno") and request.__contains__("di")
+           request.__contains__("giorno") and request.__contains__("oggi") or \
+           request.__contains__("giorno") and request.__contains__("adesso") or \
+           request.__contains__("quale") and request.__contains__("mese") or \
+           request.__contains__("qual") and request.__contains__("mese") or \
+           request.__contains__("che") and request.__contains__("mese") or \
+           request.__contains__("mese") and request.__contains__("oggi") or \
+           request.__contains__("mese") and request.__contains__("adesso") or \
+           request.__contains__("quale") and request.__contains__("anno") or \
+           request.__contains__("qual") and request.__contains__("anno") or \
+           request.__contains__("che") and request.__contains__("anno") or \
+           request.__contains__("anno") and request.__contains__("oggi") or \
+           request.__contains__("anno") and request.__contains__("adesso")
 
 
 def know_weather_from(request):
-    return any(word in request.split(" ") for word in
-               ["meteo", "weather", "forecast"]) or \
-           request.__contains__("previsioni del tempo") or \
-           request.__contains__("come è il tempo") or \
-           request.__contains__("com è il tempo") or \
-           request.__contains__("com'è il tempo") or \
-           request.__contains__("quale è il tempo") or \
-           request.__contains__("qual è il tempo") or \
-           request.__contains__("qual' è il tempo") or \
-           request.__contains__("che tempo") or \
-           request.__contains__("il tempo a")
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["meteo", "meteorologiche", "weather", "forecast"]) or \
+           request.__contains__("previsioni") and request.__contains__("tempo") or \
+           request.__contains__("come") and request.__contains__("tempo") or \
+           request.__contains__("com") and request.__contains__("tempo") or \
+           request.__contains__("quale") and request.__contains__("tempo") or \
+           request.__contains__("qual") and request.__contains__("tempo") or \
+           request.__contains__("che") and request.__contains__("tempo") or \
+           request.__contains__("tempo") and request.__contains__("a") or \
+           request.__contains__("tempo") and request.__contains__("di")
