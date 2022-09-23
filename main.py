@@ -1,56 +1,89 @@
 import os
 
-import pyttsx3
 import speech_recognition
+from vosk import Model
 
-from bot.Bot import Bot
+from bot.BotAI import BotAI
 from bot.VoiceAndRecognition import VoiceAndRecognition
 from utilities.Language import Language
+from utilities.utils import extract_cities_from
+
+name_bot = "Jarvis"
+language = Language.ITALIANO.value
+cities = extract_cities_from("./utilities/cities.csv")
+
+
+def init_recognizer_offline():
+    # estrai modello di riconoscimento offline
+    if language == Language.ITALIANO.value:
+        if not os.path.exists("./models/modello_italiano"):
+            print("Scaricare il modello da:\n"
+                  "https://alphacephei.com/vosk/models e decomprimere nella cartella models.")
+            exit(1)
+        return Model("./models/modello_italiano")
+    else:
+        if not os.path.exists("./models/modello_inglese"):
+            print("Scaricare il modello da:\n"
+                  "https://alphacephei.com/vosk/models e decomprimere nella cartella models.")
+            exit(1)
+        return Model("./models/modello_inglese")
+
+
+def init_recognizer_online():
+    # estrai modello di riconoscimento online
+    return speech_recognition.Recognizer()
+
+
+def init_recognizers():
+    return init_recognizer_online(), init_recognizer_offline()
+
 
 if __name__ == '__main__':
-    # inizializzazione del riconoscimento vocale e del microfono
-    recognizer = speech_recognition.Recognizer()
+
+    # inizializzazione del microfono
     microphone = speech_recognition.Microphone()
 
-    # inizializzazione voce e comprensione del bot
-    language = Language.ITALIANO.value
-    voice_and_recognition = VoiceAndRecognition(name="",
-                                                sex="",
-                                                speech_language=language,
-                                                recognition_language=language)
+    # inizializzazione del riconoscimento vocale
+    recognizer_online, recognizer_offline = init_recognizers()
 
-    # inizializzazione dello strumento di sintesi vocale
-    tts_engine = pyttsx3.init()
-    tts_engine = voice_and_recognition.setup_bot_voice(tts_engine)
-
-    # istanza e addestramento del bot
-    name_bot = "Jarvis"
+    # istanza del bot
     if not os.path.exists("./db.sqlite3"):
-        bot = Bot(name=name_bot)
-        bot.train(voice_and_recognition.speech_language)
+        bot = BotAI(name=name_bot,
+                    voice_and_recognition=VoiceAndRecognition(name="",
+                                                              sex="",
+                                                              speech_language=language,
+                                                              recognition_language=language),
+                    cities=cities)
+        # addestramento del bot
+        bot.train()
     else:
-        bot = Bot(name=name_bot)
+        bot = BotAI(name=name_bot,
+                    voice_and_recognition=VoiceAndRecognition(name="",
+                                                              sex="",
+                                                              speech_language=language,
+                                                              recognition_language=language),
+                    cities=cities)
 
     while True:
         try:
             # riconoscimento comando
-            recognized_data = voice_and_recognition.record_and_recognize_audio(microphone, recognizer)
-
+            recognized_data = bot.voice_and_recognition.use_recognition_online(microphone,
+                                                                               recognizer_online,
+                                                                               recognizer_offline)
             if len(recognized_data) > 0:
-                print("Tu: " + recognized_data)
-
                 # genera risposta
-                bot_response = bot.get_response(recognized_data, language)
+                bot_response = bot.get_response(recognized_data)
+
+                # nessuna risposta quindi exit
                 if bot_response is None:
-                    voice_and_recognition.play_voice_bot_speech(tts_engine, "Va bene. A presto!!!")
+                    bot.voice_and_recognition.output_response(name_bot, "Va bene. A presto!")
                     break
 
-                # output vocale
-                print(name_bot + ": " + str(bot_response))
-                voice_and_recognition.play_voice_bot_speech(tts_engine, bot_response)
+                # manda la risposta in output
+                bot.voice_and_recognition.output_response(name_bot, bot_response)
 
         except(KeyboardInterrupt, EOFError, SystemExit):
-            print("uscita!")
+            bot.voice_and_recognition.output_response("Si è verificato un problema! Riprova più tardi.")
             exit(1)
 
     exit(0)
