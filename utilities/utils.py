@@ -46,7 +46,7 @@ def greet_night_in(string):
 
 def extract_cities_from(csv):
     with open(csv, encoding="utf8") as f:
-        cities = [row.lower().replace("\n", "") for row in f]
+        cities = [normalize(row.replace("\n", "")) for row in f]
     return cities
 
 

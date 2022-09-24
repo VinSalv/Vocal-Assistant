@@ -28,7 +28,7 @@ class Voice:
         self.tts_engine.setProperty("rate", 150)
 
     def output_response_bot(self, bot_response):
-        # print e speak output
+        # stampa e comunicazione della risposta
         print(self.name_bot + ": " + str(bot_response))
         self.play_voice_bot(bot_response)
 
