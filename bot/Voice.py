@@ -23,6 +23,7 @@ class Voice:
         self.tts_engine.setProperty("voice", voices[1].id) \
             if self.language == Language.ITALIANO.value \
             else self.tts_engine.setProperty("voice", voices[2].id)
+
         # velocità del parlato del bot
         self.tts_engine.setProperty("rate", 150)
 
