@@ -1,14 +1,10 @@
 # Default ignored files
 shelf/
-
 # Editor-based HTTP Client requests
 httpRequests/
-
 # Datasource local storage ignored files
 dataSources/
-
 *.xml
-
 models/modello_inglese/*
 models/modello_italiano/*
 .idea/

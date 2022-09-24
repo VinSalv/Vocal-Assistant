@@ -28,7 +28,9 @@ from utilities.utils import greet_morning_in, greet_afternoon_in, greet_evening_
     MIN_HUMIDITY_ENG, NOTHING_HUMIDITY_ITA, NOTHING_HUMIDITY_ENG, MAX_FOG_ITA, MAX_FOG_ENG, MORE_FOG_ITA, \
     MORE_FOG_ENG, ENOUGH_FOG_ITA, ENOUGH_FOG_ENG, MIN_FOG_ITA, MIN_FOG_ENG, NOTHING_FOG_ITA, NOTHING_FOG_ENG, \
     CORRECT_AFTERNOON_ITA, CORRECT_AFTERNOON_ENG, CORRECT_EVENING_ITA, CORRECT_EVENING_ENG, CORRECT_NIGHT_ITA, \
-    CORRECT_MORNING_ITA, CORRECT_MORNING_ENG, CORRECT_NIGHT_ENG, TIME_ITA, TIME_ENG
+    CORRECT_MORNING_ITA, CORRECT_MORNING_ENG, CORRECT_NIGHT_ENG, TIME_ITA, TIME_ENG, extract_cities_from, \
+    TRAINING_CONVERSATION_ITA, TRAINING_CONVERSATION_ENG, KNOWLEDGE, CITIES_CSV, CITY_UNRECOGNIZED_ITA, \
+    CITY_UNRECOGNIZED_ENG
 
 logging.basicConfig(level=logging.CRITICAL)
 
@@ -36,44 +38,49 @@ logging.basicConfig(level=logging.CRITICAL)
 # noinspection PyShadowingNames
 class BotAI:
     bot = None
-    name = ""
-    voice_and_recognition = None
+    name_bot = ""
+    voice = None
+    recognition = None
     language = ""
     cities = None
 
-    def __init__(self, name, voice_and_recognition, cities):
-        self.name = name
+    def __init__(self, name_bot, language, recognition, voice):
+        self.name_bot = name_bot
+        self.language = language
+        self.recognition = recognition
+        self.voice = voice
+        self.cities = extract_cities_from(CITIES_CSV)
+        self.setup_bot()
+
+    def setup_bot(self):
         self.bot = ChatBot(
-            name,
+            self.name_bot,
             storage_adapter="chatterbot.storage.SQLStorageAdapter",
-            database="./db.sqlite3",
+            database=KNOWLEDGE,
             logic_adapters=[
                 "chatterbot.logic.BestMatch"
             ],
             statement_comparison_function=levenshtein_distance,
             response_selection_method=get_random_response
         )
-        self.voice_and_recognition = voice_and_recognition
-        self.language = voice_and_recognition.speech_language
-        self.cities = cities
 
     def train(self):
-        # addestramento con esempio di comunicazione
+        # addestramento con esempio di conversazione
         if self.language == Language.ITALIANO.value:
-            with open("./example_of_communication/comunicazione_di_addestramento") as f:
+            with open(TRAINING_CONVERSATION_ITA) as f:
                 conversation = f.readlines()
                 trainer = ListTrainer(self.bot)
                 trainer.train(conversation)
         else:
-            with open("./example_of_communication/training_communication") as f:
+            with open(TRAINING_CONVERSATION_ENG) as f:
                 conversation = f.readlines()
                 trainer = ListTrainer(self.bot)
                 trainer.train(conversation)
 
     def get_name_bot(self):
-        return f"Mi chiamo {self.name}, ma tu puoi chiamarmi come vuoi!" \
+        return f"Mi chiamo {self.name_bot}, ma tu puoi chiamarmi come vuoi!" \
             if self.language == Language.ITALIANO.value else \
-            f"My name is {self.name}, but you can call me whatever you want!"
+            f"My name is {self.name_bot}, but you can call me whatever you want!"
 
     def get_date(self):
         def convert_number_to_word(month_number):
@@ -127,7 +134,6 @@ class BotAI:
                     return "November"
                 elif month_number == "12":
                     return "December"
-
             return month_word
 
         def translate_english_to_italian_(english_day_word):
@@ -151,23 +157,18 @@ class BotAI:
             if platform.system() == "Windows" else \
             datetime.now().strftime("%-d/%-m/%Y")
         day_word = datetime.now().strftime('%A')
-
         # separa campi della data
         splitted_date = date_format.split('/')
         day_number = splitted_date[0]
         month_number = splitted_date[1]
         year = splitted_date[2]
-
         # traduzione del giorno in italiano
         if self.language == Language.ITALIANO.value:
             day_word = translate_english_to_italian_(day_word)
-
         # conversione del mese da numero a parola
         month_word = convert_number_to_word(month_number)
-
         # formula la data
         current_date = day_word + " " + day_number + " " + month_word + " " + year
-
         # ritorna la data
         return f"Oggi è: {current_date}" if self.language == Language.ITALIANO.value else f"Today is: {current_date}"
 
@@ -181,10 +182,8 @@ class BotAI:
         def get_city_from(recognized_data):
             # dividi la frase in parole
             words = recognized_data.split()
-
             # verifica se esiste il nome di una città nel comando
             if len(words) > 2:
-
                 # verifica se esiste il nome di una città con 4 parole
                 if len(words) >= 4:
                     for index_word in range(len(words) - 3):
@@ -195,7 +194,6 @@ class BotAI:
                         # verifica e ritorna la città
                         if possible_city in self.cities:
                             return True, possible_city
-
                 # verifica se esiste il nome di una città con 3 parole
                 if len(words) >= 3:
                     for index_word in range(len(words) - 2):
@@ -205,7 +203,6 @@ class BotAI:
                         # verifica e ritorna la città
                         if possible_city in self.cities:
                             return True, possible_city
-
                 # verifica se esiste il nome di una città con 2 parole
                 if len(words) >= 2:
                     for index_word in range(len(words) - 1):
@@ -214,23 +211,19 @@ class BotAI:
                         # verifica e ritorna la città
                         if possible_city in self.cities:
                             return True, possible_city
-
                 # verifica se esiste il nome di una città con 1 parola
                 for possible_city in words:
                     if possible_city in self.cities:
                         return True, possible_city
-
-            # ritorna città non trovata
-            if self.language == Language.ITALIANO.value:
-                return False, "Mi spiace. Non ho capito il nome della città."
-            else:
-                return False, "I'm sorry. I didn't get the name of the city."
+                # ritorna città non trovata
+                return False, CITY_UNRECOGNIZED_ITA \
+                    if self.language == Language.ITALIANO.value else \
+                    False, CITY_UNRECOGNIZED_ENG
 
         # noinspection GrazieInspection
         def get_other_info(city, weather):
             # previsione di 3 giorni consecutivi
             forecast_three_days = ""
-
             # percentuale fenomeni meteorologici
             is_current_forecast = True
             remaining_hours_within_current_day = 0
@@ -243,7 +236,6 @@ class BotAI:
             chance_of_overcast = 0
             chance_of_humidity = 0
             chance_of_thunder = 0
-
             # preleva informazioni meteorologiche e astronomiche
             for forecast in weather.forecasts:
                 # preleva data a cui fa riferimento la seguente previsione
@@ -270,18 +262,17 @@ class BotAI:
                     if self.language == Language.ITALIANO.value:
                         forecast_three_days += f" --> ora: {hourly.time / 100} " \
                                                f"temperatura: {hourly.temperature}C° " \
-                                               f"{hourly.description} {hourly.type} " \
+                                               f"{hourly.description} {hourly.type!r} " \
                                                f"velocità vento: {hourly.wind_speed}Km/h " \
-                                               f"direzione vento: {hourly.wind_direction!r}\n"
+                                               f"direzione vento: {hourly.wind_direction}\n"
                     else:
                         forecast_three_days += f" --> hour: {hourly.time / 100} " \
                                                f"temperature: {hourly.temperature}C° " \
-                                               f"{hourly.description} {hourly.type} " \
+                                               f"{hourly.description} {hourly.type!r} " \
                                                f"wind speed: {hourly.wind_speed}Km/h " \
-                                               f"wind direction: {hourly.wind_direction!r}\n"
+                                               f"wind direction: {hourly.wind_direction}\n"
                 # previsione della giornata attuale letta
                 is_current_forecast = False
-
             # normalizza le percentuali
             chance_of_frost /= remaining_hours_within_current_day
             chance_of_windy /= remaining_hours_within_current_day
@@ -291,7 +282,6 @@ class BotAI:
             chance_of_overcast /= remaining_hours_within_current_day
             chance_of_humidity /= remaining_hours_within_current_day
             chance_of_thunder /= remaining_hours_within_current_day
-
             # analisi delle percentuali
             other_info = ""
             # percentuali nuvole
@@ -305,7 +295,6 @@ class BotAI:
                 other_info += MIN_OVERCAST_ITA if self.language == Language.ITALIANO.value else MIN_OVERCAST_ENG
             else:
                 other_info += NOTHING_OVERCAST_ITA if self.language == Language.ITALIANO.value else NOTHING_OVERCAST_ENG
-
             # percentuali temporali
             if 85 < chance_of_thunder < 100:
                 other_info += MAX_THUNDER_ITA if self.language == Language.ITALIANO.value else MAX_THUNDER_ENG
@@ -317,7 +306,6 @@ class BotAI:
                 other_info += MIN_THUNDER_ITA if self.language == Language.ITALIANO.value else MIN_THUNDER_ENG
             else:
                 other_info += NOTHING_THUNDER_ITA if self.language == Language.ITALIANO.value else NOTHING_THUNDER_ENG
-
             # percentuali pioggia e neve
             if chance_of_rain > chance_of_snow:
                 if 85 < chance_of_rain < 100:
@@ -341,7 +329,6 @@ class BotAI:
                     other_info += MIN_SNOW_ITA if self.language == Language.ITALIANO.value else MIN_SNOW_ENG
                 else:
                     other_info += NOTHING_SNOW_ITA if self.language == Language.ITALIANO.value else NOTHING_SNOW_ENG
-
             # percentuali caldo e freddo
             if chance_of_hightemp > chance_of_frost:
                 if chance_of_hightemp > 60:
@@ -353,7 +340,6 @@ class BotAI:
                     other_info += MORE_FOREST_ITA if self.language == Language.ITALIANO.value else MORE_FOREST_ENG
                 else:
                     other_info += MIN_FOREST_ITA if self.language == Language.ITALIANO.value else MIN_FOREST_ENG
-
             # percentuali percentuale vento
             if 85 < chance_of_windy < 100:
                 other_info += MAX_WINDY_ITA if self.language == Language.ITALIANO.value else MAX_WINDY_ENG
@@ -365,7 +351,6 @@ class BotAI:
                 other_info += MIN_WINDY_ITA if self.language == Language.ITALIANO.value else MIN_WINDY_ENG
             else:
                 other_info += NOTHING_WINDY_ITA if self.language == Language.ITALIANO.value else NOTHING_WINDY_ENG
-
             # percentuali umidità
             if 85 < chance_of_humidity < 100:
                 other_info += MAX_HUMIDITY_ITA if self.language == Language.ITALIANO.value else MAX_HUMIDITY_ENG
@@ -377,7 +362,6 @@ class BotAI:
                 other_info += MIN_HUMIDITY_ITA if self.language == Language.ITALIANO.value else MIN_HUMIDITY_ENG
             else:
                 other_info += NOTHING_HUMIDITY_ITA if self.language == Language.ITALIANO.value else NOTHING_HUMIDITY_ENG
-
             # percentuali nebbia
             if 85 < chance_of_fog < 100:
                 other_info += MAX_FOG_ITA if self.language == Language.ITALIANO.value else MAX_FOG_ENG
@@ -389,32 +373,24 @@ class BotAI:
                 other_info += MIN_FOG_ITA if self.language == Language.ITALIANO.value else MIN_FOG_ENG
             else:
                 other_info += NOTHING_FOG_ITA if self.language == Language.ITALIANO.value else NOTHING_FOG_ENG
-
             # stampa le previsioni dei 3 giorni
             print(city + "\n" + forecast_three_days)
-
             # ritorna analisi delle percentuali riguardanti i fenomeni meteorologici della restante giornata
             return other_info
 
         async with python_weather.Client(format=python_weather.METRIC) as client:
             # verifica se esiste una città
             city_is_found, response = get_city_from(recognized_data)
-
             # rilevata la città
             if city_is_found:
-
                 # preleva informazioni meteorologiche e astronomiche della città
                 city = response
                 weather = await client.get(city)
-
                 # preleva temperatura attuale
                 current_temperature = str(weather.current.temperature)
-
                 # preleva other meteorological info
                 other_info = get_other_info(city, weather)
-
                 # ritorna informazioni meteorologiche e astronomiche della città
-
                 return "Attualmente a " + city + " ci sono " + current_temperature + \
                        " gradi centigradi. " + other_info + \
                        " Ti mostro le previsioni nei prossimi 2 giorni e i dettagli astronomici." \
@@ -422,7 +398,6 @@ class BotAI:
                     "Currently at " + city + " there are " + current_temperature + \
                     " degrees centigrade. " + other_info + \
                     " I show you the forecast over the next 2 days and astronomical details."
-
             # città non rilevata
             else:
                 return response
@@ -432,7 +407,6 @@ class BotAI:
         # il comando potrebbe contenere un saluto specifico, un semplice saluto o altro
         is_greeting = False
         correct_greeting = False
-
         # verifica se il comando contiene lo specifico saluto del buon giorno
         if greet_morning_in(recognized_data):
             # verifica se il saluto è corretto
@@ -442,7 +416,6 @@ class BotAI:
             else:
                 is_greeting = True
                 correct_greeting = False
-
         # verifica se il comando contiene lo specifico saluto del buon pomeriggio
         elif greet_afternoon_in(recognized_data):
             # verifica se il saluto è corretto
@@ -452,7 +425,6 @@ class BotAI:
             else:
                 is_greeting = True
                 correct_greeting = False
-
         # verifica se il comando contiene lo specifico saluto della buon sera
         elif greet_evening_in(recognized_data):
             # verifica se il saluto è corretto
@@ -462,7 +434,6 @@ class BotAI:
             else:
                 is_greeting = True
                 correct_greeting = False
-
         # verifica se il comando contiene lo specifico saluto della buona notte
         elif greet_night_in(recognized_data):
             # verifica se il saluto è corretto
@@ -472,7 +443,6 @@ class BotAI:
             else:
                 is_greeting = True
                 correct_greeting = False
-
         # ritorna cosa è stato rilevato
         return is_greeting, correct_greeting
 
@@ -491,49 +461,40 @@ class BotAI:
         # esci
         if exit_from(recognized_data):
             return None
-
         # restituisci nome bot
         elif know_name_bot_from(recognized_data):
             return self.get_name_bot()
-
         # restituisci orario
         elif know_time_from(recognized_data):
             return self.get_time()
-
         # restituisci data
         elif know_date_from(recognized_data):
             return self.get_date()
-
         # restituisci meteo
         elif know_weather_from(recognized_data):
             if os.name == "nt":
                 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
             return asyncio.run(self.get_weather(recognized_data))
-
         # restituisci risposta data dall'addestramento e verifica un eventuale saluto
         else:
             # formula una risposta del bot
-            response = str(self.bot.get_response(recognized_data.replace(self.name.lower(), '')))
-
+            response = str(self.bot.get_response(recognized_data.replace(self.name_bot.lower(), '')))
             # verifica l'eventuale saluto o altro da parte dell'interlocutore
             is_greeting, correct_greeting = self.what_is_in(recognized_data)
-
             # saluto dell'interlocutore
             if is_greeting:
                 # saluto non appropriato
                 if not correct_greeting:
                     response = self.get_correct_greeting_in()
             else:
-
                 # verifica l'eventuale saluto da parte del bot
                 while True:
                     is_greeting, correct_greeting = self.what_is_in(response)
                     # saluto del bot, ma non appropriato
                     if is_greeting and not correct_greeting:
-                        response = str(self.bot.get_response(recognized_data.replace(self.name.lower(), '')))
+                        response = str(self.bot.get_response(recognized_data.replace(self.name_bot.lower(), '')))
                     # saluto semplice o altro
                     else:
                         break
-
             # ritorna la risposta
             return response.encode(encoding="ascii", errors="ignore").decode()

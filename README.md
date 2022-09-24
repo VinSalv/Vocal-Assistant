@@ -8,7 +8,8 @@ Implementation of Vocal Assistant using google's speach recognition online/offli
 |-- Vocal Assistant
 |   |-- bot
 |   |   |-- Bot.py
-|   |   |-- VoiceAndRecognition.py
+|   |   |-- Recognition.py
+|   |   |-- Voice.py
 |   |-- example_of_communication
 |   |   |-- comunicazione_di_addestramento
 |   |   |-- training_communication
@@ -26,9 +27,10 @@ Implementation of Vocal Assistant using google's speach recognition online/offli
 The developed code is divided in the following folders/classes:
 
 - The “bot” folder contains:
-    - Bot.py implementing class Bot related to ChatterBot which sustains a communication and recognises specific
+    - Bot.py implementing class Bot related to ChatterBot which sustains a conversation and performs carry out specific
       commands;
-    - VoiceAssistant.py implementing the voice and the recognition capability related to the bot.
+    - Recognition.py implementing the recognition capability related to the bot.
+    - Voice.py implementing the voice related to the bot.
 - The “example_of_communication” folder contains text files to train the bot with an example of communication.
 - The “models” folder contains files to recognise the voce offline.
 - The “utilities” folder contains:
