@@ -1,35 +1,52 @@
 import platform
 from datetime import datetime
 
+ONE = "uno" or "one"
+TWO = "due" or "two"
+THREE = "tre" or "three"
+FOUR = "quattro" or "four"
+FIVE = "cinque" or "five"
+SIX = "sei" or "six"
+SEVEN = "sette" or "seven"
+EIGHT = "otto" or "eight"
+NINE = "nove" or "nine"
+
 
 def normalize(text):
-    return text.lower(). \
+    text = text.lower(). \
         replace("ì", "i'"). \
         replace("è", "e'"). \
         replace("é", "e'"). \
         replace("ò", "o'"). \
         replace("à", "a'"). \
         replace("ù", "u'"). \
-        replace("uno", "1'"). \
-        replace("due", "2'"). \
-        replace("tre", "3'"). \
-        replace("quattro", "4'"). \
-        replace("cinque", "5'"). \
-        replace("sei", "6'"). \
-        replace("sette", "7'"). \
-        replace("otto", "8'"). \
-        replace("nove", "9'"). \
-        replace("one", "1'"). \
-        replace("two", "2'"). \
-        replace("three", "3'"). \
-        replace("four", "4'"). \
-        replace("five", "5'"). \
-        replace("six", "6'"). \
-        replace("seven", "7'"). \
-        replace("eight", "8'"). \
-        replace("nine", "9'"). \
         replace("pi greco", "3,14'"). \
         replace("eulero", "2,71'")
+
+    text_to_return = ""
+    for word in text:
+        if word == ONE:
+            text_to_return += "1"
+        elif word == TWO:
+            text_to_return += "2"
+        elif word == THREE:
+            text_to_return += "3"
+        elif word == FOUR:
+            text_to_return += "4"
+        elif word == FIVE:
+            text_to_return += "5"
+        elif word == SIX:
+            text_to_return += "6"
+        elif word == SEVEN:
+            text_to_return += "7"
+        elif word == EIGHT:
+            text_to_return += "8"
+        elif word == NINE:
+            text_to_return += "9"
+        else:
+            text_to_return += word
+
+    return text_to_return
 
 
 # preleva l'orario e rimuovi gli zeri superflui
