@@ -27,8 +27,9 @@ def normalize(text):
         replace("six", "6'"). \
         replace("seven", "7'"). \
         replace("eight", "8'"). \
-        replace("nine", "9'")
-
+        replace("nine", "9'"). \
+        replace("pi greco", "3,14'"). \
+        replace("eulero", "2,71'")
 
 # preleva l'orario e rimuovi gli zeri superflui
 current_time = datetime.now().strftime('%#H e %#M').replace(" e 0", "") \
