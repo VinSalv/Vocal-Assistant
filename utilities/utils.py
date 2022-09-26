@@ -31,6 +31,7 @@ def normalize(text):
         replace("pi greco", "3,14'"). \
         replace("eulero", "2,71'")
 
+
 # preleva l'orario e rimuovi gli zeri superflui
 current_time = datetime.now().strftime('%#H e %#M').replace(" e 0", "") \
     if platform.system() == "Windows" else \
