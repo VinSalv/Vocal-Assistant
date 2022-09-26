@@ -431,6 +431,7 @@ class BotAI:
             else:
                 return response
 
+    # noinspection PyPep8
     def get_result_from(self, recognized_data):
         def remove_last_word_from(string):
             string_to_return = ""
@@ -451,7 +452,7 @@ class BotAI:
         def fetch_number_and_exponent_from(string):
             splitted_string = string.split("^")
             first_part = splitted_string[0].split(" ")
-            return first_part[len(first_part) - 2], splitted_expression[1]
+            return first_part[len(first_part) - 2], splitted_string[1]
 
         # rimuovi parole ridondanti
         recognized_data = recognized_data.replace("elevato alla", "elevato"). \
@@ -609,9 +610,10 @@ class BotAI:
                         if logarithm_base != "" and logarithm_number != "":
                             # formatta l'espressione
                             expression += "math.log(" + logarithm_base + "," + logarithm_number + ") "
-                            expression_to_print += "logaritmo base " + logarithm_base + " di " + logarithm_number + " " \
-                                if self.language == Language.ITALIANO.value else \
-                                "logarithm base " + logarithm_base + " of " + logarithm_number + " "
+                            expression_to_print += \
+                                "logaritmo base " + logarithm_base + " di " + logarithm_number + " " \
+                                    if self.language == Language.ITALIANO.value else \
+                                    "logarithm base " + logarithm_base + " of " + logarithm_number + " "
                             # resetta il flag i componenti del logaritmo
                             is_logarithm = False
                             logarithm_base = ""

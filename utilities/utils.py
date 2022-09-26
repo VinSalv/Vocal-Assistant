@@ -13,6 +13,8 @@ NINE = "nove" or "nine"
 
 
 def normalize(text):
+    text_to_return = ""
+
     text = text.lower(). \
         replace("ì", "i'"). \
         replace("è", "e'"). \
@@ -23,7 +25,6 @@ def normalize(text):
         replace("pi greco", "3,14'"). \
         replace("eulero", "2,71'")
 
-    text_to_return = ""
     for word in text:
         if word == ONE:
             text_to_return += "1"
@@ -111,6 +112,7 @@ def know_time_from(request):
 def know_date_from(request):
     return any(word in request.replace("'", " ").split(" ") for word in
                ["data", "mese", "anno", "date", "day", "month", "year"]) or \
+           request.__contains__("quanto") and request.__contains__("ne") and request.__contains__("abbiamo") or \
            request.__contains__("quale") and request.__contains__("giorno") or \
            request.__contains__("qual") and request.__contains__("giorno") or \
            request.__contains__("che") and request.__contains__("giorno") or \
