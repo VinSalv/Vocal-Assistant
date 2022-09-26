@@ -1,5 +1,7 @@
 import asyncio
 import logging
+# noinspection PyUnresolvedReferences
+import math
 import os
 import platform
 from datetime import datetime
@@ -30,7 +32,11 @@ from utilities.utils import greet_morning_in, greet_afternoon_in, greet_evening_
     CORRECT_AFTERNOON_ITA, CORRECT_AFTERNOON_ENG, CORRECT_EVENING_ITA, CORRECT_EVENING_ENG, CORRECT_NIGHT_ITA, \
     CORRECT_MORNING_ITA, CORRECT_MORNING_ENG, CORRECT_NIGHT_ENG, TIME_ITA, TIME_ENG, extract_cities_from, \
     TRAINING_CONVERSATION_ITA, TRAINING_CONVERSATION_ENG, KNOWLEDGE, CITIES_CSV, CITY_UNRECOGNIZED_ITA, \
-    CITY_UNRECOGNIZED_ENG
+    CITY_UNRECOGNIZED_ENG, know_calculations_from, number_in, operator_in, plus_in, minus_in, for_in, divided_in, \
+    elevated_in, logarithm_in, factorial_in, root_in, base_in, index_in, cardinal_number_in, \
+    INCOMPREHENSIBLE_CALCULATION_ITA, INCOMPREHENSIBLE_CALCULATION_ENG, only_number_in, one_cardinal_in, \
+    two_cardinal_in, three_cardinal_in, four_cardinal_in, five_cardinal_in, six_cardinal_in, seven_cardinal_in, \
+    eight_cardinal_in, nine_cardinal_in, ten_cardinal_in
 
 logging.basicConfig(level=logging.CRITICAL)
 
@@ -57,9 +63,7 @@ class BotAI:
             self.name_bot,
             storage_adapter="chatterbot.storage.SQLStorageAdapter",
             database=KNOWLEDGE,
-            logic_adapters=[
-                "chatterbot.logic.BestMatch"
-            ],
+            logic_adapters=["chatterbot.logic.BestMatch"],
             statement_comparison_function=levenshtein_distance,
             response_selection_method=get_random_response
         )
@@ -190,7 +194,7 @@ class BotAI:
             # verifica se esiste il nome di una città nel comando
             if len(words) > 2:
 
-                # verifica se esiste il nome di una città con 4 parole
+                # verifica se esiste il nome di una città con quattro parole
                 if len(words) >= 4:
                     for index_word in range(len(words) - 3):
                         possible_city = words[index_word] + " " + \
@@ -201,7 +205,7 @@ class BotAI:
                         if possible_city in self.cities:
                             return True, possible_city
 
-                # verifica se esiste il nome di una città con 3 parole
+                # verifica se esiste il nome di una città con tre parole
                 if len(words) >= 3:
                     for index_word in range(len(words) - 2):
                         possible_city = words[index_word] + " " + \
@@ -211,7 +215,7 @@ class BotAI:
                         if possible_city in self.cities:
                             return True, possible_city
 
-                # verifica se esiste il nome di una città con 2 parole
+                # verifica se esiste il nome di una città con due parole
                 if len(words) >= 2:
                     for index_word in range(len(words) - 1):
                         possible_city = words[index_word] + " " + \
@@ -220,7 +224,7 @@ class BotAI:
                         if possible_city in self.cities:
                             return True, possible_city
 
-                # verifica se esiste il nome di una città con 1 parola
+                # verifica se esiste il nome di una città con uno parola
                 for possible_city in words:
                     if possible_city in self.cities:
                         return True, possible_city
@@ -230,7 +234,7 @@ class BotAI:
                     False, CITY_UNRECOGNIZED_ENG
 
         def get_other_info(city, weather):
-            # previsione di 3 giorni consecutivi
+            # previsione di tre giorni consecutivi
             forecast_three_days = ""
 
             # percentuale fenomeni meteorologici
@@ -396,9 +400,8 @@ class BotAI:
             else:
                 other_info += NOTHING_FOG_ITA if self.language == Language.ITALIANO.value else NOTHING_FOG_ENG
 
-            # stampa le previsioni dei 3 giorni
+            # stampa le previsioni dei tre giorni
             print(city + "\n" + forecast_three_days)
-
             # ritorna analisi delle percentuali riguardanti i fenomeni meteorologici della restante giornata
             return other_info
 
@@ -416,17 +419,275 @@ class BotAI:
                 # preleva other meteorological info
                 other_info = get_other_info(city, weather)
                 # ritorna informazioni meteorologiche e astronomiche della città
-                return "Attualmente a " + city + " ci sono " + current_temperature + \
+                return "Attualmente in " + city + " ci sono " + current_temperature + \
                        " gradi centigradi. " + other_info + \
                        " Ti mostro le previsioni nei prossimi 2 giorni e i dettagli astronomici." \
                     if self.language == Language.ITALIANO.value else \
-                    "Currently at " + city + " there are " + current_temperature + \
+                    "Currently in " + city + " there are " + current_temperature + \
                     " degrees centigrade. " + other_info + \
                     " I show you the forecast over the next 2 days and astronomical details."
 
             # città non rilevata
             else:
                 return response
+
+    def get_result_from(self, recognized_data):
+        def remove_last_word_from(string):
+            string_to_return = ""
+            splitted_string = string.split(" ")
+            for index_string in range(0, len(splitted_string) - 2):
+                string_to_return += splitted_expression[index_string] + " "
+            return string_to_return
+
+        def perform_factorial(factorial_number):
+            result = 1
+            if result == 0:
+                result = 1
+            else:
+                for number in range(1, int(factorial_number) + 1):
+                    result *= number
+            return result
+
+        def fetch_number_and_exponent_from(string):
+            splitted_string = string.split("^")
+            first_part = splitted_string[0].split(" ")
+            return first_part[len(first_part) - 2], splitted_expression[1]
+
+        # rimuovi parole ridondanti
+        recognized_data = recognized_data.replace("elevato alla", "elevato"). \
+            replace("elevato al", "elevato"). \
+            replace("elevated to", "elevated")
+
+        # espressione matematica
+        expression = ""
+        expression_to_print = ""
+
+        # parole chiave rilevate
+        is_factorial = False
+        is_elevated = False
+        is_logarithm = False
+        is_logarithm_base = False
+        is_root = False
+        is_root_index = False
+
+        # componenti delle espressioni
+        logarithm_base = ""
+        logarithm_number = ""
+        root_index = ""
+        root_number = ""
+        expression_result = 0
+
+        # costruzione dell'espressione da calcolare
+        try:
+            words = recognized_data.split(" ")
+            for word in words:
+
+                # solo le parole chiave vengono accettate
+                if number_in(word) or operator_in(word) or cardinal_number_in(word):
+
+                    # abbinamento con parole chiave per il fattoriale
+                    possible_factorial_number = word
+                    if factorial_in(word):
+                        is_factorial = True
+                        splitted_expression = expression.split(" ")
+                        # la parola fattoriale potrebbe essere letta dopo il numero
+                        if len(splitted_expression) > 1:
+                            # la parola è stata letta dopo il numero
+                            if only_number_in(splitted_expression[len(splitted_expression) - 2]):
+                                # preleva il numero di cui si vuole ricalcolare il fattoriale
+                                factorial_number = splitted_expression[len(splitted_expression) - 2]
+                                # rimuovi l'ultimo numero per formattare correttamente l'espressione
+                                expression = remove_last_word_from(expression)
+                                expression_to_print = remove_last_word_from(expression_to_print)
+                                # calcolo del fattoriale
+                                result = perform_factorial(factorial_number)
+                                # formatta l'espressione
+                                expression += str(result) + " "
+                                expression_to_print += "fattoriale di " + factorial_number + " " \
+                                    if self.language == Language.ITALIANO.value else \
+                                    "factorial of " + factorial_number + " "
+                                # resetta il flag
+                                is_factorial = False
+
+                    # la parola fattoriale è stata letta prima del numero
+                    elif is_factorial:
+                        # preleva il numero di cui si vuole ricalcolare il fattoriale
+                        factorial_number = possible_factorial_number
+                        # calcolo del fattoriale
+                        result = perform_factorial(factorial_number)
+                        # formatta l'espressione
+                        expression += str(result) + " "
+                        expression_to_print += "fattoriale di " + factorial_number + " " \
+                            if self.language == Language.ITALIANO.value else \
+                            "factorial of " + factorial_number + " "
+                        # resetta il flag
+                        is_factorial = False
+
+                    # abbinamento con parole chiave per la somma
+                    elif plus_in(word):
+                        # formatta l'espressione
+                        expression += "+ "
+                        expression_to_print += "+ "
+
+                    # abbinamento con parole chiave per la sottrazione
+                    elif minus_in(word):
+                        # formatta l'espressione
+                        expression += "- "
+                        expression_to_print += "- "
+
+                    # abbinamento con parole chiave per la moltiplicazione
+                    elif for_in(word):
+                        # formatta l'espressione
+                        expression += "* "
+                        expression_to_print += "* "
+
+                    # abbinamento con parole chiave per la divisione
+                    elif divided_in(word):
+                        # formatta l'espressione
+                        expression += "/ "
+                        expression_to_print += "/ "
+
+                    # abbinamento con parole chiave per l'elevazione a potenza
+                    elif elevated_in(word) or is_elevated:
+                        # è stata rilevata la parola chiave per l'elevazione a potenza
+                        if elevated_in(word):
+                            is_elevated = True
+                        # aggiunta elevamento a potenza all'espressione
+                        elif is_elevated:
+                            # verifica se per l'esponente è stato usato un numero cardinale
+                            if one_cardinal_in(word):
+                                expression += "^1"
+                            elif two_cardinal_in(word):
+                                expression += "^2"
+                            elif three_cardinal_in(word):
+                                expression += "^3"
+                            elif four_cardinal_in(word):
+                                expression += "^4"
+                            elif five_cardinal_in(word):
+                                expression += "^5"
+                            elif six_cardinal_in(word):
+                                expression += "^6"
+                            elif seven_cardinal_in(word):
+                                expression += "^7"
+                            elif eight_cardinal_in(word):
+                                expression += "^8"
+                            elif nine_cardinal_in(word):
+                                expression += "^9"
+                            elif ten_cardinal_in(word):
+                                expression += "^10"
+                            else:
+                                expression += "^" + word
+                            # preleva il numero e l'esponente
+                            number, exponent = fetch_number_and_exponent_from(expression)
+                            # rimuovi l'ultimo numero per formattare correttamente l'espressione
+                            expression = remove_last_word_from(expression)
+                            expression_to_print = remove_last_word_from(expression_to_print)
+                            # formatta l'espressione
+                            expression += "pow(" + number + "," + exponent + ") "
+                            expression_to_print += number + " elevato " + exponent + " " \
+                                if self.language == Language.ITALIANO.value else \
+                                number + " elevated  " + exponent + " "
+                            # resetta il flag
+                            is_elevated = False
+
+                    # abbinamento con parole chiave per il logaritmo
+                    elif logarithm_in(word) or base_in(word) or is_logarithm:
+                        # è stata rilevata la parola chiave per il logaritmo
+                        if logarithm_in(word):
+                            is_logarithm = True
+                        # è stata rilevata la parola chiave per la base del logaritmo
+                        elif base_in(word):
+                            is_logarithm_base = True
+                        # preleva l'argomento del logaritmo dopo aver prelevato la base
+                        elif number_in(word) and is_logarithm_base:
+                            logarithm_base = word
+                            is_logarithm_base = False
+                        # preleva l'argomento del logaritmo prima di aver prelevato la base
+                        elif number_in(word):
+                            logarithm_number = word
+                        # aggiunta logaritmo all'espressione
+                        if logarithm_base != "" and logarithm_number != "":
+                            # formatta l'espressione
+                            expression += "math.log(" + logarithm_base + "," + logarithm_number + ") "
+                            expression_to_print += "logaritmo base " + logarithm_base + " di " + logarithm_number + " " \
+                                if self.language == Language.ITALIANO.value else \
+                                "logarithm base " + logarithm_base + " of " + logarithm_number + " "
+                            # resetta il flag i componenti del logaritmo
+                            is_logarithm = False
+                            logarithm_base = ""
+                            logarithm_number = ""
+
+                    # abbinamento con parole chiave per la radice
+                    elif root_in(word) or index_in(word) or is_root:
+                        # è stata rilevata la parola chiave per la radice
+                        if root_in(word):
+                            is_root = True
+                        # è stata rilevata la parola chiave per l'indice della radice
+                        elif index_in(word):
+                            is_root_index = True
+                        # verifica se per l'indice è stato usato un numero cardinale
+                        elif word == "quadrata" or word == "square":
+                            root_index = "2"
+                        # verifica se per l'indice è stato usato un numero cardinale
+                        elif word == "cubica" or word == "cubic":
+                            root_index = "3"
+                        # preleva il numero della radice dopo aver prelevato il suo indice
+                        elif number_in(word) and is_root_index:
+                            root_index = word
+                            is_root_index = False
+                        # preleva il numero della radice prima di aver prelevato il suo indice
+                        elif number_in(word):
+                            root_number = word
+                        # aggiunta della radice all'espressione
+                        if root_index != "" and root_number != "":
+                            # formatta l'espressione
+                            expression += "pow(" + root_number + ",1/" + root_index + ")"
+                            expression_to_print += "radice di indice " + root_index + " di " + root_number + " " \
+                                if self.language == Language.ITALIANO.value else \
+                                "root of index " + root_index + " of " + root_number + " "
+                            # resetta il flag i componenti del logaritmo
+                            is_root = False
+                            root_index = ""
+                            root_number = ""
+
+                    # aggiungi numero all'espressione
+                    else:
+                        # formatta l'espressione
+                        expression_to_print += word + " "
+                        expression += word + " "
+
+                # calcolo del risultato dell'espressione
+                expression_result = str(round(eval(expression), 2))
+        # non è stato possibile calcolare l'espressione
+        except SyntaxError:
+            return INCOMPREHENSIBLE_CALCULATION_ITA \
+                if self.language == Language.ITALIANO.value else \
+                INCOMPREHENSIBLE_CALCULATION_ENG
+
+        # non è stato possibile calcolare l'espressione
+        except ():
+            return INCOMPREHENSIBLE_CALCULATION_ITA \
+                if self.language == Language.ITALIANO.value else \
+                INCOMPREHENSIBLE_CALCULATION_ENG
+
+        # ritorna il risultato dell'espressione
+        return (expression_to_print + "= "). \
+                   replace(".0", ""). \
+                   replace("  ", " "). \
+                   replace("+", "piu'"). \
+                   replace("-", "meno"). \
+                   replace("*", "per"). \
+                   replace("/", "diviso") \
+               + expression_result \
+            if self.language == Language.ITALIANO.value else \
+            (expression_to_print + "= " + expression_result). \
+                replace(".0", ""). \
+                replace("  ", " "). \
+                replace("+", "plus"). \
+                replace("-", "minus"). \
+                replace("*", "times"). \
+                replace("/", "divided") \
+            + expression_result
 
     @staticmethod
     def what_is_in(recognized_data):
@@ -510,6 +771,10 @@ class BotAI:
             if os.name == "nt":
                 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
             return asyncio.run(self.get_weather(recognized_data))
+
+        # restituisci calcolo
+        elif know_calculations_from(recognized_data):
+            return self.get_result_from(recognized_data)
 
         # restituisci risposta data dall'addestramento e verifica un eventuale saluto
         else:

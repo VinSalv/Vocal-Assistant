@@ -47,6 +47,7 @@ The developed code is divided in the following folders/classes:
 - sustaining a simple conversation
 - distinguish parts of day
 - tell weather and forecast
+- perform calculations
 - learning from interactions
 
 ## Biography

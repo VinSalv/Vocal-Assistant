@@ -9,7 +9,25 @@ def normalize(text):
         replace("é", "e'"). \
         replace("ò", "o'"). \
         replace("à", "a'"). \
-        replace("ù", "u'")
+        replace("ù", "u'"). \
+        replace("uno", "1'"). \
+        replace("due", "2'"). \
+        replace("tre", "3'"). \
+        replace("quattro", "4'"). \
+        replace("cinque", "5'"). \
+        replace("sei", "6'"). \
+        replace("sette", "7'"). \
+        replace("otto", "8'"). \
+        replace("nove", "9'"). \
+        replace("one", "1'"). \
+        replace("two", "2'"). \
+        replace("three", "3'"). \
+        replace("four", "4'"). \
+        replace("five", "5'"). \
+        replace("six", "6'"). \
+        replace("seven", "7'"). \
+        replace("eight", "8'"). \
+        replace("nine", "9'")
 
 
 # preleva l'orario e rimuovi gli zeri superflui
@@ -102,6 +120,139 @@ def know_weather_from(request):
            request.__contains__("che") and request.__contains__("tempo") or \
            request.__contains__("tempo") and request.__contains__("a") or \
            request.__contains__("tempo") and request.__contains__("di")
+
+
+def plus_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["+", "piu", "plus"])
+
+
+def minus_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["-", "meno", "minus"])
+
+
+def for_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["*", "x", "per", "moltiplicato", "times", "for", "multiplied"])
+
+
+def divided_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["/", "diviso", "fratto", "divided", "fraction"])
+
+
+def elevated_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["elevato", "power", "elevato", "al", "alla", "elevated", "power"])
+
+
+def logarithm_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["logaritmo", "logarithm"])
+
+
+def base_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["base"])
+
+
+def factorial_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["fattoriale", "factorial"])
+
+
+def root_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["radice", "root"])
+
+
+def index_in(string):
+    return any(word in string.replace("'", " ").split(" ") for word in
+               ["indice", "index"])
+
+
+def operator_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["+", "-", "*", "x", "/", "piu", "meno", "per", "moltiplicato", "diviso", "fratto",
+                "elevato", "potenza", "al", "alla", "radice", "indice", "logaritmo", "base", "fattoriale",
+                "plus", "minus", "times", "for", "multiplied", "divided", "fraction",
+                "elevated", "power", "root", "index", "logarithm", "base", "factorial"])
+
+
+def one_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["prima", "first"])
+
+
+def two_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["seconda", "quadrato", "second", "square"])
+
+
+def three_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["terza", "cubo", "cubica", "third", "cube", "cubic"])
+
+
+def four_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["quarta", "fourth"])
+
+
+def five_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["quinta", "fifth"])
+
+
+def six_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["sesta", "sixth"])
+
+
+def seven_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["settima", "seventh"])
+
+
+def eight_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["ottava", "eighth"])
+
+
+def nine_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["nona", "ninth"])
+
+
+def ten_cardinal_in(request):
+    return any(word in request.replace("'", " ").split(" ") for word in
+               ["decima", "tenth"])
+
+
+def cardinal_number_in(request):
+    return one_cardinal_in(request) or \
+           two_cardinal_in(request) or \
+           three_cardinal_in(request) or \
+           four_cardinal_in(request) or \
+           five_cardinal_in(request) or \
+           six_cardinal_in(request) or \
+           seven_cardinal_in(request) or \
+           eight_cardinal_in(request) or \
+           nine_cardinal_in(request) or \
+           ten_cardinal_in(request)
+
+
+def number_in(request):
+    return any(char.isdigit() for char in request)
+
+
+def only_number_in(request):
+    return all(char.isdigit() for char in request)
+
+
+def know_calculations_from(request):
+    return operator_in(request) and number_in(request)
 
 
 KNOWLEDGE = "./db.sqlite3"
@@ -241,3 +392,6 @@ MIN_FOG_ITA = "con nebbie scarse."
 MIN_FOG_ENG = "with scanty mists."
 NOTHING_FOG_ITA = "senza nebbia."
 NOTHING_FOG_ENG = "without fog."
+
+INCOMPREHENSIBLE_CALCULATION_ITA = "Non sono stato in grado di comprendere il calcolo richiesto. Prova altre parole."
+INCOMPREHENSIBLE_CALCULATION_ENG = "I was unable to understand the required calculation. Try other words."
