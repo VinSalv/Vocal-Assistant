@@ -96,13 +96,18 @@ def exit_from(request):
 
 
 def know_name_bot_from(request):
-    return  any(word in request.replace("'", " ").split(" ") for word in ["tuo"]) and any(word in request.replace("'", " ").split(" ") for word in ["nome"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["come"]) and any(word in request.replace("'", " ").split(" ") for word in ["chiami"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(word in request.replace("'", " ").split(" ") for word in ["nome"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["chiamarti"])  or \
+    return any(word in request.replace("'", " ").split(" ") for word in ["tuo"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["nome"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["come"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["chiami"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["nome"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["chiamarti"]) or \
            any(word in request.replace("'", " ").split(" ") for word in ["yout"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["what"]) and any(word in request.replace("'", " ").split(" ") for word in ["name"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["call"]) and any(word in request.replace("'", " ").split(" ") for word in ["you"])
+           any(word in request.replace("'", " ").split(" ") for word in ["what"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["name"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["call"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["you"])
 
 
 def know_time_from(request):
@@ -114,35 +119,60 @@ def know_time_from(request):
 def know_date_from(request):
     return any(word in request.replace("'", " ").split(" ") for word in
                ["data", "date", "day", "month", "year"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["quanto"]) and any(word in request.replace("'", " ").split(" ") for word in ["ne"]) and any(word in request.replace("'", " ").split(" ") for word in ["abbiamo"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["quanto"]) and request.__contains__("giorno") or \
-           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(word in request.replace("'", " ").split(" ") for word in ["adesso"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["mese"]) and any(word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["mese"]) and any(word in request.replace("'", " ").split(" ") for word in ["adesso"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["anno"]) and any(word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(word in request.replace("'", " ").split(" ") for word in ["oggi"])
+           any(word in request.replace("'", " ").split(" ") for word in ["quanto"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["ne"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["abbiamo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["giorno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["giorno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quanto"]) and request.__contains__(
+        "giorno") or \
+           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["adesso"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["mese"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["mese"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["adesso"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["anno"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["oggi"])
 
 
 def know_weather_from(request):
     return any(word in request.replace("'", " ").split(" ") for word in
                ["meteo", "meteorologiche", "weather", "forecast"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["previsioni"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["come"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["com"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) and any(word in request.replace("'", " ").split(" ") for word in ["a"]) or \
-           any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) and any(word in request.replace("'", " ").split(" ") for word in ["di"])
+           any(word in request.replace("'", " ").split(" ") for word in ["previsioni"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["come"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["com"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["a"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) and any(
+        word in request.replace("'", " ").split(" ") for word in ["di"])
 
 
 def plus_in(string):

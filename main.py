@@ -4,25 +4,30 @@ from bot.BotAI import BotAI
 from bot.Recognition import Recognition
 from bot.Voice import Voice
 from utilities.Language import Language
-from utilities.utils import VERIFIED_A_PROBLEM_ITA, VERIFIED_A_PROBLEM_ENG, EXIT_ITA, EXIT_ENG, KNOWLEDGE, ready_text
+from utilities.utils import VERIFIED_A_PROBLEM_ITA, VERIFIED_A_PROBLEM_ENG, EXIT_ITA, EXIT_ENG, ready_text, \
+    KNOWLEDGE_ITA, KNOWLEDGE_ENG
 
 name_bot = "Jarvis"
 language = Language.ITALIANO.value
 
 if __name__ == '__main__':
     # istanza del bot
-    if not os.path.exists(KNOWLEDGE):
-        bot = BotAI(name_bot=name_bot,
-                    language=language,
-                    recognition=Recognition(name_bot=name_bot, language=language),
-                    voice=Voice(name_bot=name_bot, language=language, name_voice="", sex_voice=""))
-        # addestramento del bot
-        bot.train()
+    knowledge_exist = True
+    if language == Language.ITALIANO.value:
+        if not os.path.exists(KNOWLEDGE_ITA):
+            knowledge_exist = False
     else:
-        bot = BotAI(name_bot=name_bot,
-                    language=language,
-                    recognition=Recognition(name_bot=name_bot, language=language),
-                    voice=Voice(name_bot=name_bot, language=language, name_voice="", sex_voice=""))
+        if not os.path.exists(KNOWLEDGE_ENG):
+            knowledge_exist = False
+
+    bot = BotAI(name_bot=name_bot,
+                language=language,
+                recognition=Recognition(name_bot=name_bot, language=language),
+                voice=Voice(name_bot=name_bot, language=language, name_voice="", sex_voice=""))
+
+    # addestramento del bot
+    if not knowledge_exist:
+        bot.train()
 
     # bot in funzione
     bot.voice.output_response_bot(ready_text)

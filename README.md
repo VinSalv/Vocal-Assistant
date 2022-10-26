@@ -38,7 +38,8 @@ The developed code is divided in the following folders/classes:
     - cities.csv names of lots of cities;
     - Language.py implementing enumeration of italian and english language;
     - util.py implementing useful methods and constants.
-- The file db:ita.sqlite3 and db_eng.sqlite3 contain your interaction with the bot in order to improve its communication.
+- The file db:ita.sqlite3 and db_eng.sqlite3 contain your interaction with the bot in order to improve its
+  communication.
 - The class main.py which allows to initialize and start the bot.
 
 ### Current capacities
