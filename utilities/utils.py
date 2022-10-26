@@ -308,8 +308,7 @@ def know_calculations_from(request):
     return operator_in(request) and number_in(request)
 
 
-KNOWLEDGE_ITA = "C:/Users/vince/PycharmProjects/Vocal-Assistant/db_ita.sqlite3"
-KNOWLEDGE_ENG = "C:/Users/vince/PycharmProjects/Vocal-Assistant/db_eng.sqlite3"
+KNOWLEDGE = "C:/Users/vince/PycharmProjects/Vocal-Assistant/db.sqlite3"
 MODEL_ITA = "C:/Users/vince/PycharmProjects/Vocal-Assistant/models/modello_italiano"
 MODEL_ENG = "C:/Users/vince/PycharmProjects/Vocal-Assistant/models/models/modello_inglese"
 REC_AUDIO = "C:/Users/vince/PycharmProjects/Vocal-Assistant/rec_audio.wav"

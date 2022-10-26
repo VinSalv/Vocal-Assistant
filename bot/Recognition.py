@@ -55,10 +55,6 @@ class Recognition:
                 # estrai audio dal microfono
                 audio = self.recognizer_online.listen(self.microphone)
 
-                # salva audio in caso di riconoscimento offline
-                with open(REC_AUDIO, "wb") as file:
-                    file.write(audio.get_wav_data())
-
             # nessun audio rilevato durante il time out
             except lan.WaitTimeoutError:
                 return False, CHECK_MICROPHONE_ITA \
@@ -79,7 +75,11 @@ class Recognition:
                 return False, None
 
             # problemi con l'accesso a Internet
+
             except speech_recognition.RequestError:
+                # salva audio in caso di riconoscimento offline
+                with open(REC_AUDIO, "wb") as file:
+                    file.write(audio.get_wav_data())
                 recognized_data = self.use_recognition_offline()
 
             # rimozione audio salvato
@@ -116,6 +116,9 @@ class Recognition:
             return False, VERIFIED_A_PROBLEM_ITA \
                 if self.language == Language.ITALIANO.value else \
                 False, VERIFIED_A_PROBLEM_ENG
+
+        # rimozione audio salvato
+        os.remove(REC_AUDIO)
 
         # normalizzazione maiuscole e accenti
         recognized_data = normalize(recognized_data)

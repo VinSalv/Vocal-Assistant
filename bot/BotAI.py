@@ -36,7 +36,7 @@ from utilities.utils import greet_morning_in, greet_afternoon_in, greet_evening_
     elevated_in, logarithm_in, factorial_in, root_in, base_in, index_in, cardinal_number_in, \
     INCOMPREHENSIBLE_CALCULATION_ITA, INCOMPREHENSIBLE_CALCULATION_ENG, only_number_in, one_cardinal_in, \
     two_cardinal_in, three_cardinal_in, four_cardinal_in, five_cardinal_in, six_cardinal_in, seven_cardinal_in, \
-    eight_cardinal_in, nine_cardinal_in, ten_cardinal_in, KNOWLEDGE_ITA, KNOWLEDGE_ENG
+    eight_cardinal_in, nine_cardinal_in, ten_cardinal_in, KNOWLEDGE
 
 logging.basicConfig(level=logging.CRITICAL)
 
@@ -62,7 +62,7 @@ class BotAI:
         self.bot = ChatBot(
             self.name_bot,
             storage_adapter="chatterbot.storage.SQLStorageAdapter",
-            database=KNOWLEDGE_ITA if self.language == Language.ITALIANO.value else KNOWLEDGE_ENG,
+            database=KNOWLEDGE,
             logic_adapters=["chatterbot.logic.BestMatch"],
             statement_comparison_function=levenshtein_distance,
             response_selection_method=get_random_response
@@ -228,10 +228,11 @@ class BotAI:
                 for possible_city in words:
                     if possible_city in self.cities:
                         return True, possible_city
-                # ritorna città non trovata
-                return False, CITY_UNRECOGNIZED_ITA \
-                    if self.language == Language.ITALIANO.value else \
-                    False, CITY_UNRECOGNIZED_ENG
+
+            # ritorna città non trovata
+            return (False, CITY_UNRECOGNIZED_ITA) \
+                if self.language == Language.ITALIANO.value else \
+                (False, CITY_UNRECOGNIZED_ENG)
 
         def get_other_info(city, weather):
             # previsione di tre giorni consecutivi
@@ -419,7 +420,8 @@ class BotAI:
                 # preleva other meteorological info
                 other_info = get_other_info(city, weather)
                 # ritorna informazioni meteorologiche e astronomiche della città
-                return "Attualmente in " + city + " ci sono " + current_temperature + \
+                return city_is_found,\
+                       "Attualmente in " + city + " ci sono " + current_temperature + \
                        " gradi centigradi. " + other_info + \
                        " Ti mostro le previsioni nei prossimi 2 giorni e i dettagli astronomici." \
                     if self.language == Language.ITALIANO.value else \
@@ -429,7 +431,7 @@ class BotAI:
 
             # città non rilevata
             else:
-                return response
+                return city_is_found, response
 
     # noinspection PyPep8
     def get_result_from(self, recognized_data):
@@ -772,8 +774,11 @@ class BotAI:
         elif know_weather_from(recognized_data):
             if os.name == "nt":
                 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-            return asyncio.run(self.get_weather(recognized_data))
-
+            is_found, answer = asyncio.run(self.get_weather(recognized_data))
+            if is_found:
+                return answer
+            else:
+                return str(self.bot.get_response(recognized_data.replace(self.name_bot.lower(), '')))
         # restituisci calcolo
         elif know_calculations_from(recognized_data):
             return self.get_result_from(recognized_data)
