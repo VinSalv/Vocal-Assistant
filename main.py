@@ -4,7 +4,7 @@ from bot.BotAI import BotAI
 from bot.Recognition import Recognition
 from bot.Voice import Voice
 from utilities.Language import Language
-from utilities.utils import VERIFIED_A_PROBLEM_ITA, VERIFIED_A_PROBLEM_ENG, EXIT_ITA, EXIT_ENG, KNOWLEDGE
+from utilities.utils import VERIFIED_A_PROBLEM_ITA, VERIFIED_A_PROBLEM_ENG, EXIT_ITA, EXIT_ENG, KNOWLEDGE, ready_text
 
 name_bot = "Jarvis"
 language = Language.ITALIANO.value
@@ -25,6 +25,7 @@ if __name__ == '__main__':
                     voice=Voice(name_bot=name_bot, language=language, name_voice="", sex_voice=""))
 
     # bot in funzione
+    bot.voice.output_response_bot(ready_text)
     while True:
         try:
             # riconoscimento comando

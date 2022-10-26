@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/cygdrive/c/Users/vince/PycharmProjects/Vocal-Assistant/main.py", line 3, in <module>
+    from bot.BotAI import BotAI
+  File "/cygdrive/c/Users/vince/PycharmProjects/Vocal-Assistant/bot/BotAI.py", line 9, in <module>
+    import python_weather
+ModuleNotFoundError: No module named 'python_weather'
+Traceback (most recent call last):
+  File "/cygdrive/c/Users/vince/PycharmProjects/Vocal-Assistant/main.py", line 3, in <module>
+    from bot.BotAI import BotAI
+  File "/cygdrive/c/Users/vince/PycharmProjects/Vocal-Assistant/bot/BotAI.py", line 9, in <module>
+    import python_weather
+ModuleNotFoundError: No module named 'python_weather'

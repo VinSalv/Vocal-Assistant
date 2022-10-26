@@ -11,6 +11,8 @@ SEVEN = "sette" or "seven"
 EIGHT = "otto" or "eight"
 NINE = "nove" or "nine"
 
+ready_text = "Eccomi! Sono pronto!!"
+
 
 def normalize(text):
     text_to_return = ""
