@@ -53,7 +53,7 @@ class Recognition:
                 print(LISTENING_ITA) if self.language == Language.ITALIANO.value else print(LISTENING_ENG)
 
                 # estrai audio dal microfono
-                audio = self.recognizer_online.listen(self.microphone, timeout=10, phrase_time_limit=20)
+                audio = self.recognizer_online.listen(self.microphone)
 
                 # salva audio in caso di riconoscimento offline
                 with open(REC_AUDIO, "wb") as file:

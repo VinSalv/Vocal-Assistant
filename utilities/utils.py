@@ -96,13 +96,13 @@ def exit_from(request):
 
 
 def know_name_bot_from(request):
-    return request.__contains__("tuo nome") or \
-           (request.__contains__("come") and request.__contains__("chiami")) or \
-           (request.__contains__("che") and request.__contains__("nome")) or \
-           request.__contains__("chiamarti") or \
-           request.__contains__("your name") or \
-           (request.__contains__("what") and request.__contains__("name")) or \
-           request.__contains__("call you")
+    return  any(word in request.replace("'", " ").split(" ") for word in ["tuo"]) and any(word in request.replace("'", " ").split(" ") for word in ["nome"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["come"]) and any(word in request.replace("'", " ").split(" ") for word in ["chiami"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(word in request.replace("'", " ").split(" ") for word in ["nome"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["chiamarti"])  or \
+           any(word in request.replace("'", " ").split(" ") for word in ["yout"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["what"]) and any(word in request.replace("'", " ").split(" ") for word in ["name"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["call"]) and any(word in request.replace("'", " ").split(" ") for word in ["you"])
 
 
 def know_time_from(request):
@@ -113,36 +113,36 @@ def know_time_from(request):
 
 def know_date_from(request):
     return any(word in request.replace("'", " ").split(" ") for word in
-               ["data", "mese", "anno", "date", "day", "month", "year"]) or \
-           request.__contains__("quanto") and request.__contains__("ne") and request.__contains__("abbiamo") or \
-           request.__contains__("quale") and request.__contains__("giorno") or \
-           request.__contains__("qual") and request.__contains__("giorno") or \
-           request.__contains__("che") and request.__contains__("giorno") or \
-           request.__contains__("giorno") and request.__contains__("oggi") or \
-           request.__contains__("giorno") and request.__contains__("adesso") or \
-           request.__contains__("quale") and request.__contains__("mese") or \
-           request.__contains__("qual") and request.__contains__("mese") or \
-           request.__contains__("che") and request.__contains__("mese") or \
-           request.__contains__("mese") and request.__contains__("oggi") or \
-           request.__contains__("mese") and request.__contains__("adesso") or \
-           request.__contains__("quale") and request.__contains__("anno") or \
-           request.__contains__("qual") and request.__contains__("anno") or \
-           request.__contains__("che") and request.__contains__("anno") or \
-           request.__contains__("anno") and request.__contains__("oggi") or \
-           request.__contains__("anno") and request.__contains__("adesso")
+               ["data", "date", "day", "month", "year"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quanto"]) and any(word in request.replace("'", " ").split(" ") for word in ["ne"]) and any(word in request.replace("'", " ").split(" ") for word in ["abbiamo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quanto"]) and request.__contains__("giorno") or \
+           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(word in request.replace("'", " ").split(" ") for word in ["adesso"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(word in request.replace("'", " ").split(" ") for word in ["mese"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["mese"]) and any(word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["mese"]) and any(word in request.replace("'", " ").split(" ") for word in ["adesso"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(word in request.replace("'", " ").split(" ") for word in ["anno"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["anno"]) and any(word in request.replace("'", " ").split(" ") for word in ["oggi"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["giorno"]) and any(word in request.replace("'", " ").split(" ") for word in ["oggi"])
 
 
 def know_weather_from(request):
     return any(word in request.replace("'", " ").split(" ") for word in
                ["meteo", "meteorologiche", "weather", "forecast"]) or \
-           request.__contains__("previsioni") and request.__contains__("tempo") or \
-           request.__contains__("come") and request.__contains__("tempo") or \
-           request.__contains__("com") and request.__contains__("tempo") or \
-           request.__contains__("quale") and request.__contains__("tempo") or \
-           request.__contains__("qual") and request.__contains__("tempo") or \
-           request.__contains__("che") and request.__contains__("tempo") or \
-           request.__contains__("tempo") and request.__contains__("a") or \
-           request.__contains__("tempo") and request.__contains__("di")
+           any(word in request.replace("'", " ").split(" ") for word in ["previsioni"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["come"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["com"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["quale"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["qual"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["che"]) and any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) and any(word in request.replace("'", " ").split(" ") for word in ["a"]) or \
+           any(word in request.replace("'", " ").split(" ") for word in ["tempo"]) and any(word in request.replace("'", " ").split(" ") for word in ["di"])
 
 
 def plus_in(string):
@@ -278,13 +278,14 @@ def know_calculations_from(request):
     return operator_in(request) and number_in(request)
 
 
-KNOWLEDGE = "./db.sqlite3"
-MODEL_ITA = "./models/modello_italiano"
-MODEL_ENG = "./models/modello_inglese"
-REC_AUDIO = "./rec_audio.wav"
-CITIES_CSV = "./utilities/cities.csv"
-TRAINING_CONVERSATION_ITA = "./example_of_communication/comunicazione_di_addestramento"
-TRAINING_CONVERSATION_ENG = "./example_of_communication/training_communication"
+KNOWLEDGE_ITA = "C:/Users/vince/PycharmProjects/Vocal-Assistant/db_ita.sqlite3"
+KNOWLEDGE_ENG = "C:/Users/vince/PycharmProjects/Vocal-Assistant/db_eng.sqlite3"
+MODEL_ITA = "C:/Users/vince/PycharmProjects/Vocal-Assistant/models/modello_italiano"
+MODEL_ENG = "C:/Users/vince/PycharmProjects/Vocal-Assistant/models/models/modello_inglese"
+REC_AUDIO = "C:/Users/vince/PycharmProjects/Vocal-Assistant/rec_audio.wav"
+CITIES_CSV = "C:/Users/vince/PycharmProjects/Vocal-Assistant/utilities/cities.csv"
+TRAINING_CONVERSATION_ITA = "C:/Users/vince/PycharmProjects/Vocal-Assistant/example_of_communication/comunicazione_di_addestramento"
+TRAINING_CONVERSATION_ENG = "C:/Users/vince/PycharmProjects/Vocal-Assistant/example_of_communication/training_communication"
 
 CHECK_MICROPHONE_ITA = "Controllare se il microfono è acceso, per favore."
 CHECK_MICROPHONE_ENG = "Please check if the microphone is on."

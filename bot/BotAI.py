@@ -31,12 +31,12 @@ from utilities.utils import greet_morning_in, greet_afternoon_in, greet_evening_
     MORE_FOG_ENG, ENOUGH_FOG_ITA, ENOUGH_FOG_ENG, MIN_FOG_ITA, MIN_FOG_ENG, NOTHING_FOG_ITA, NOTHING_FOG_ENG, \
     CORRECT_AFTERNOON_ITA, CORRECT_AFTERNOON_ENG, CORRECT_EVENING_ITA, CORRECT_EVENING_ENG, CORRECT_NIGHT_ITA, \
     CORRECT_MORNING_ITA, CORRECT_MORNING_ENG, CORRECT_NIGHT_ENG, TIME_ITA, TIME_ENG, extract_cities_from, \
-    TRAINING_CONVERSATION_ITA, TRAINING_CONVERSATION_ENG, KNOWLEDGE, CITIES_CSV, CITY_UNRECOGNIZED_ITA, \
+    TRAINING_CONVERSATION_ITA, TRAINING_CONVERSATION_ENG, CITIES_CSV, CITY_UNRECOGNIZED_ITA, \
     CITY_UNRECOGNIZED_ENG, know_calculations_from, number_in, operator_in, plus_in, minus_in, for_in, divided_in, \
     elevated_in, logarithm_in, factorial_in, root_in, base_in, index_in, cardinal_number_in, \
     INCOMPREHENSIBLE_CALCULATION_ITA, INCOMPREHENSIBLE_CALCULATION_ENG, only_number_in, one_cardinal_in, \
     two_cardinal_in, three_cardinal_in, four_cardinal_in, five_cardinal_in, six_cardinal_in, seven_cardinal_in, \
-    eight_cardinal_in, nine_cardinal_in, ten_cardinal_in
+    eight_cardinal_in, nine_cardinal_in, ten_cardinal_in, KNOWLEDGE_ITA, KNOWLEDGE_ENG
 
 logging.basicConfig(level=logging.CRITICAL)
 
@@ -62,7 +62,7 @@ class BotAI:
         self.bot = ChatBot(
             self.name_bot,
             storage_adapter="chatterbot.storage.SQLStorageAdapter",
-            database=KNOWLEDGE,
+            database=KNOWLEDGE_ITA if self.language == Language.ITALIANO.value else KNOWLEDGE_ENG,
             logic_adapters=["chatterbot.logic.BestMatch"],
             statement_comparison_function=levenshtein_distance,
             response_selection_method=get_random_response
