@@ -82,9 +82,6 @@ class Recognition:
                     file.write(audio.get_wav_data())
                 recognized_data = self.use_recognition_offline()
 
-            # rimozione audio salvato
-            os.remove(REC_AUDIO)
-
             # normalizzazione maiuscole e accenti
             recognized_data = normalize(recognized_data)
 

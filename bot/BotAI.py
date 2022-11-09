@@ -420,14 +420,14 @@ class BotAI:
                 # preleva other meteorological info
                 other_info = get_other_info(city, weather)
                 # ritorna informazioni meteorologiche e astronomiche della città
-                return city_is_found,\
+                return city_is_found, \
                        "Attualmente in " + city + " ci sono " + current_temperature + \
                        " gradi centigradi. " + other_info + \
                        " Ti mostro le previsioni nei prossimi 2 giorni e i dettagli astronomici." \
-                    if self.language == Language.ITALIANO.value else \
-                    "Currently in " + city + " there are " + current_temperature + \
-                    " degrees centigrade. " + other_info + \
-                    " I show you the forecast over the next 2 days and astronomical details."
+                           if self.language == Language.ITALIANO.value else \
+                           "Currently in " + city + " there are " + current_temperature + \
+                           " degrees centigrade. " + other_info + \
+                           " I show you the forecast over the next 2 days and astronomical details."
 
             # città non rilevata
             else:

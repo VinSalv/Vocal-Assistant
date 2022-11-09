@@ -20,9 +20,9 @@ class Voice:
     def setup_bot_voice(self):
         # settaggio lingua del bot
         voices = self.tts_engine.getProperty("voices")
-        self.tts_engine.setProperty("voice", voices[1].id) \
+        self.tts_engine.setProperty("voice", voices[2].id) \
             if self.language == Language.ITALIANO.value \
-            else self.tts_engine.setProperty("voice", voices[2].id)
+            else self.tts_engine.setProperty("voice", voices[0].id)
 
         # velocità del parlato del bot
         self.tts_engine.setProperty("rate", 150)
@@ -35,3 +35,4 @@ class Voice:
     def play_voice_bot(self, bot_response):
         self.tts_engine.say(str(bot_response))
         self.tts_engine.runAndWait()
+        self.tts_engine.stop()
